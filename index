@@ -8,9 +8,9 @@
 </head>
 <body>
   <h1>Projects</h1>
-  <div id="todo">
+  <div id="todo" class="project">
     <h2>Basic To-Do List<h2>
-    <p id="description">simple to do list to help organize day to day activities. Designed using HTML, CSS and JavaScript. Click<a href="todolist.html">here</a>to use my to do list.</p>
+    <p class="description">simple to do list to help organize day to day activities. Designed using HTML, CSS and JavaScript. Click<a href="todolist.html">here</a>to use my to do list.</p>
   </div>
 </body>
 </html>
