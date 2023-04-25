@@ -6,5 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Main Page</title>
 </head>
-<body></body>
+<body>
+  <h1>Projects</h1>
+  <div id="todo">
+    <h2>Basic To-Do List<h2>
+    <p id="description">simple to do list to help organize day to day activities. Designed using HTML, CSS and JavaScript. Click<a href="todolist.html">here</a>to use my to do list.</p>
+  </div>
+</body>
 </html>
