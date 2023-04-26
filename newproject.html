@@ -1,10 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-	<meta http-equip="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>New Project</title>
-</head>
-<body>blank canvas for now</body>
+  <head>
+  	<meta charset="utf-8">
+    <title>JavaScript for Everyone:DOM</title>
+    <style type="text/css">
+    	.wrapper{
+    		display: flex;
+    		flex-direction: column;
+    		align-items: center;
+    		justify-content: center;
+    	}
+    	li{
+    		text-align: center;
+    		background-color: lightblue;
+    		border: 1px solid lightblue;
+    		border-radius: 4px;
+    		margin: 4px;
+    	}
+    	ul{
+    		list-style: none;
+  			padding-inline-start: 0px;
+    		width: 45%;
+    	}
+    	h1,h2{
+    		margin: 9px;
+    	}
+    </style>
+    <script type="text/javascript">
+    	function ready(){
+    	//number 1
+setInterval(function changeColor1() {
+document.getElementById("year").style.color="green";
+}, 1000);
+setInterval(function changeColor2() {
+document.getElementById("year").style.color="pink";
+}, 2000);
+//number 2
+const date = String(new Date());
+var h2 = document.querySelector("h2");
+var newDiv = document.createElement("div");
+newDiv.setAttribute("id","DnT");
+newDiv.style.width="45%";
+newDiv.style.textAlign="center";
+//date
+var newP = document.createElement("h3");
+newP.setAttribute("id","date")
+newP.innerHTML="Date: "+date.slice(0,15);
+newDiv.appendChild(newP);
+//time
+var newP = document.createElement("h3");
+newP.setAttribute("id","time")
+newP.innerHTML="Time: "+date.slice(16,21);
+newDiv.appendChild(newP);
+h2.insertAdjacentElement("afterend", newDiv);
+//number 3
+setInterval(function changeColor3() {
+document.getElementById("DnT").style.backgroundColor="yellow";
+}, 1000);
+setInterval(function changeColor4() {
+document.getElementById("DnT").style.backgroundColor="blue";
+}, 2000);
+//number 4
+//working on functions...it's complicated
+};
+    	document.addEventListener("DOMContentLoaded",ready);
+    </script>
+  </head>
+  <body>
+    <div class="wrapper">
+        <h1>Challenges of <span id="year">2023</span></h1>
+        <h2>JavaScript Challenge</h2>
+        <ul>
+            <li>Python Challenge Done</li>
+            <li>JavaScript Challenge Ongoing</li>
+            <li>React Challenge Coming</li>
+            <li>FullStack Challenge Coming</li>
+            <li>DataAnalysis Challenge Coming</li>
+            <li>ReactNative Challenge Coming</li>
+            <li>MachineLearning Challenge Coming</li>
+        </ul>
+    </div>
+  </body>
 </html>

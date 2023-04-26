@@ -63,14 +63,22 @@
     width:100%;
     }
   </style>
-  <script>		
+  <script>	
+  function ready(){	
     var a=1;
     var input = document.getElementById("inputBox");
     input.addEventListener("keydown", function(e){
     if (e.key=="Enter")
       addFunction();
     });
-
+    function removeFunction(d){
+    let get = d.getAttribute('id');
+    var b=document.getElementById(get);
+    b.removeChild(b.lastElementChild);
+    var l="h3" + get;
+    var val = document.getElementById(l).innerHTML;
+    document.getElementById(l).innerHTML="<s>"+val+"</s>";
+    };
     function addFunction(){
     var val = document.getElementById("inputBox").value;
     var newList = document.createElement("li");
@@ -89,17 +97,11 @@
     document.getElementById("inputBox").value="";
     a=a+1;
     };
-    function removeFunction(d){
- 	let get = d.getAttribute('id');
-  	var b=document.getElementById(get);
-  	b.removeChild(b.lastElementChild);
-  	var l="h3" + get;
-  	var val = document.getElementById(l).innerHTML;
-  	document.getElementById(l).innerHTML="<s>"+val+"</s>";
-    };
     function clearFunction(){
     document.getElementById("list").innerHTML="";
     };
+  }
+  document.addEventListener("DOMContentLoaded",ready);
   </script>
 </head>	
 <body>
