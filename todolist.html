@@ -10,7 +10,7 @@
     display:flex;
     justify-content: center;
     background-color:grey;
-    }	
+    } 
     #container{
     display:flex;
     flex-direction: column;
@@ -63,14 +63,17 @@
     width:100%;
     }
   </style>
-  <script>	
-  function ready(){	
+  <script>  
     var a=1;
+    function ready(){
     var input = document.getElementById("inputBox");
     input.addEventListener("keydown", function(e){
     if (e.key=="Enter")
       addFunction();
     });
+    };
+    document.addEventListener("DOMContentLoaded",ready);
+
     function removeFunction(d){
     let get = d.getAttribute('id');
     var b=document.getElementById(get);
@@ -100,10 +103,8 @@
     function clearFunction(){
     document.getElementById("list").innerHTML="";
     };
-  }
-  document.addEventListener("DOMContentLoaded",ready);
   </script>
-</head>	
+</head> 
 <body>
   <section id='container'>
     <h1>To-Do List</h1>
