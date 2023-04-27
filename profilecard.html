@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<meta charset="utf-8">
+    <title>Git account searcher</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <style type="text/css">
+    body{
+      font-family: 'Lato', sans-serif;
+	  display:flex;
+	  flex-direction:column;
+	  align-items:center;
+	  justify-content:center;
+	  background-color:#D1EAF0;
+	}
+	.wrapper{
+	  display: flex;
+	  justify-content:space-around;
+	  border: 2px solid grey;
+	  border-radius:60px;
+	  height: 60px;
+	  width:50%;
+	}
+	#textBar{
+	  width:85%;
+	  height:70%;
+	  border:0px;
+	  margin-top:8px;
+	  margin-bottom:8px;
+	  margin-left:16px;
+	  background-color:#D1EAF0;
+	}
+	#searchIcon{
+	  display:flex;
+	  margin:14px;
+	}
+#cardContainer{
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  margin-top:8px;
+  border-radius:18px;
+  width: 50%;
+  background-color:white;
+}
+#cardHeader{
+background-color:lightblue;
+border-radius: 18px;
+width:100%;
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align: center;}
+#socialNumbers{
+  display:flex;
+}
+#socialNumbers>p{
+border:1px solid lightblue;
+  background-color:lightblue;
+  border-radius:6px;
+margin:5px;
+  padding:7px;
+}
+#avatar{
+	height:120px;
+	width:120px;
+	border-radius: 50%;
+}
+#popup{
+  display:none;
+  background-color:red;
+}
+    </style>
+    <script type="text/javascript">
+    function ready(){
+    	icon =document.getElementById("searchIcon");
+	icon.addEventListener("click",usernameSearch);
+	function usernameSearch(){
+		username= document.getElementById("textBar").value;
+    if (username =="" || username==" "){
+      document.getElementById("popup").style.display="block";
+       document.getElementById("cardContainer").style.display = "none";
+    }
+	  if (username !="" && username!=" "){
+ document.getElementById("popup").style.display="none";
+      var url = String("https://api.github.com/users/"+username);
+      var profileUrl = String("https://github.com/"+username);
+      document.querySelector("a").setAttribute("href",profileUrl)
+    console.log("User data from: "+url);
+	   fetch(url)
+	  .then(response => response.json())
+	  .then(function (data) {
+       console.log(data.name);
+    const things=["login","name","email","company","public_repos","hireable","followers","following","bio"];
+    const prefix=["@","","","Works at: ","Number of public repositories: ","Hireable: ", "Followers: ","Following: ",""];
+       var imgUrl = data.avatar_url;
+       var imgBox = document.getElementById("avatar");
+       imgBox.setAttribute("src",imgUrl);
+       var i;
+     for(i=0;i<things.length;i++){
+       if (String(data[things[i]])!="null"){
+         document.getElementById(things[i]).innerHTML=prefix[i]+data[things[i]];}
+     };
+     })
+	  .catch(error => console.error(error));
+	  document.getElementById("cardContainer").style.display = "flex";};
+	};
+	};
+	 document.addEventListener("DOMContentLoaded",ready);
+    </script>
+  </head>
+<body>
+  <h3>Enter your Github username below:</h3>
+    <div class="wrapper">
+      <input id ="textBar" type="text"/>
+       <div id="searchIcon"><svg xmlns="http://www.w3.org/2000/svg" width="30px" height="30px" viewBox="0 0 24 24" fill="none">
+<path d="M15 15L21 21" stroke="grey" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="grey" stroke-width="2"/>
+</svg></div>
+    </div>
+  <h3 id="popup">Enter a valid username!</h3>
+  <div id="cardContainer">
+    <div id="cardHeader">
+    	<a href="">
+    		<image id="avatar"/>
+    		<p id ="login">username</p>
+    	</a>
+    	<h2 id = "name" style="color: blue">Name is not available</h2>
+    	<b><p id = "bio">Bio data is not available</p></b>
+	</div>
+    <p id="email">Email address is not available</p>
+    <p id = "company">company is not available</p>
+    <p id="public_repos">Number of public repositories</p>
+    <p id="hireable">hireability data is not available</p>
+    <div id="socialNumbers">
+      <p id="followers">followers</p>
+      <p id="following">following</p>
+    </div>
+  </div>
+  </body>
+
+
+
+
+
+
+
+
+
+<!--<div class="icon"><svg id="mic" xmlns="http://www.w3.org/2000/svg" height="23px" width="20px"><path fill="#4285f4" d="m12 15c1.66 0 3-1.31 3-2.97v-7.02c0-1.66-1.34-3.01-3-3.01s-3 1.34-3 3.01v7.02c0 1.66 1.34 2.97 3 2.97z"></path><path fill="#34a853" d="m11 18.08h2v3.92h-2z"></path><path fill="#fbbc05" d="m7.05 16.87c-1.27-1.33-2.05-2.83-2.05-4.87h2c0 1.45 0.56 2.42 1.47 3.38v0.32l-1.15 1.18z"></path><path fill="#ea4335" d="m12 16.93a4.97 5.25 0 0 1 -3.54 -1.55l-1.41 1.49c1.26 1.34 3.02 2.13 4.95 2.13 3.87 0 6.99-2.92 6.99-7h-1.99c0 2.92-2.24 4.93-5 4.93z"></path></svg></div>
+      <div class="icon"><image src=https://static.wikia.nocookie.net/logopedia/images/2/2b/Google_Lens_2021.svg width="20px" height="20px"></image></div> 
+</html>
+
+
+function ready(){
+    	//number 1
+setInterval(function changeColor1() {
+document.getElementById("year").style.color="green";
+}, 1000);
+setInterval(function changeColor2() {
+document.getElementById("year").style.color="pink";
+}, 2000);
+//number 2
+const date = String(new Date());
+var h2 = document.querySelector("h2");
+var newDiv = document.createElement("div");
+newDiv.setAttribute("id","DnT");
+newDiv.style.width="45%";
+newDiv.style.textAlign="center";
+//date
+var newP = document.createElement("h3");
+newP.setAttribute("id","date")
+newP.innerHTML="Date: "+date.slice(0,15);
+newDiv.appendChild(newP);
+//time
+var newP = document.createElement("h3");
+newP.setAttribute("id","time")
+newP.innerHTML="Time: "+date.slice(16,21);
+newDiv.appendChild(newP);
+h2.insertAdjacentElement("afterend", newDiv);
+//number 3
+setInterval(function changeColor3() {
+document.getElementById("DnT").style.backgroundColor="yellow";
+}, 1000);
+setInterval(function changeColor4() {
+document.getElementById("DnT").style.backgroundColor="blue";
+}, 2000);
+//number 4
+ var i;
+ nodelist=document.querySelectorAll("li");
+  for (i = 0; i < nodelist.length; i++) {
+    nodelist[i].addEventListener("click",function(){
+	this.style.backgroundColor="red";
+});
+  }
+
+
+};
+    document.addEventListener("DOMContentLoaded",ready);
+    fetch('https://api.github.com/')
+  .then(response => response.json())
+  .then(data => console.log(data.user_url))
+  .catch(error => console.error(error));
