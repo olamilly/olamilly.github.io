@@ -52,7 +52,8 @@ width:100%;
 display:flex;
 flex-direction:column;
 align-items:center;
-text-align: center;}
+text-align: center;
+padding: 7px;}
 #socialNumbers{
   display:flex;
 }
@@ -72,12 +73,18 @@ margin:5px;
   display:none;
   background-color:red;
 }
+#locBar{
+	display: flex;
+}
     </style>
     <script type="text/javascript">
     function ready(){
     	icon =document.getElementById("searchIcon");
 	icon.addEventListener("click",usernameSearch);
 	function usernameSearch(){
+		document.querySelector(".wrapper").style.display="none";
+		document.querySelector("h3").style.display="none";
+		setTimeout(function load(){document.querySelector("body").insertAdjacentHTML("afterbegin","<h1>Loading...</h1>");},100);
 		username= document.getElementById("textBar").value;
     if (username =="" || username==" "){
       document.getElementById("popup").style.display="block";
@@ -93,8 +100,8 @@ margin:5px;
 	  .then(response => response.json())
 	  .then(function (data) {
        console.log(data.name);
-    const things=["login","name","email","company","public_repos","hireable","followers","following","bio"];
-    const prefix=["@","","","Works at: ","Number of public repositories: ","Hireable: ", "Followers: ","Following: ",""];
+    const things=["login","name","email","company","public_repos","hireable","followers","following","bio","location"];
+    const prefix=["@","","","Works at: ","Number of public repositories: ","Hireable: ", "Followers: ","Following: ","",""];
        var imgUrl = data.avatar_url;
        var imgBox = document.getElementById("avatar");
        imgBox.setAttribute("src",imgUrl);
@@ -105,7 +112,9 @@ margin:5px;
      };
      })
 	  .catch(error => console.error(error));
-	  document.getElementById("cardContainer").style.display = "flex";};
+	  setInterval(function reveal(){
+	  	document.querySelector("h1").style.display="none";
+	  	document.getElementById("cardContainer").style.display = "flex";},1000)};
 	};
 	};
 	 document.addEventListener("DOMContentLoaded",ready);
@@ -123,17 +132,20 @@ margin:5px;
   <h3 id="popup">Enter a valid username!</h3>
   <div id="cardContainer">
     <div id="cardHeader">
-    	<a href="">
+    	<a style="text-decoration: none;" href="">
     		<image id="avatar"/>
     		<p id ="login">username</p>
     	</a>
     	<h2 id = "name" style="color: blue">Name is not available</h2>
     	<b><p id = "bio">Bio data is not available</p></b>
+    	<div id="locBar"><svg aria-hidden="true" height="20px" viewBox="0 0 16 16" version="1.1" width="20px" data-view-component="true" class="octicon octicon-location">
+    <path d="m12.596 11.596-3.535 3.536a1.5 1.5 0 0 1-2.122 0l-3.535-3.536a6.5 6.5 0 1 1 9.192-9.193 6.5 6.5 0 0 1 0 9.193Zm-1.06-8.132v-.001a5 5 0 1 0-7.072 7.072L8 14.07l3.536-3.534a5 5 0 0 0 0-7.072ZM8 9a2 2 0 1 1-.001-3.999A2 2 0 0 1 8 9Z"></path>
+</svg><p id="location" style="margin: 0px">Location data is not available</p></div>
 	</div>
     <p id="email">Email address is not available</p>
-    <p id = "company">company is not available</p>
+    <p id = "company">Company Name is not available</p>
     <p id="public_repos">Number of public repositories</p>
-    <p id="hireable">hireability data is not available</p>
+    <p id="hireable">Hireability data is not available</p>
     <div id="socialNumbers">
       <p id="followers">followers</p>
       <p id="following">following</p>
