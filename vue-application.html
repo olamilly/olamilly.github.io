@@ -175,7 +175,10 @@ display: flex;
       </div>
     </div>
     <div class="tweets">
-      <h2 v-if="td">Tweets</h2>
+      <h2>Tweets</h2>
+      <div v-if="nt" class="tweet" >
+        <h3 style="width: 100%; text-align: center">No tweets yet.</h3>
+      </div>
       <div class="tweet" v-for="(tw, index) in tweets">
         <div>
         <h3>{{ tw.user }}</h3>
@@ -196,7 +199,7 @@ display: flex;
       <label for="username">Username</label>
       <input type="text" placeholder="Username" v-model="fullTweet.username" />
       <label for="bio">Bio</label>
-      <textarea value="bio" placeholder="Bio" v-model="bio"></textarea>
+      <textarea placeholder="Bio" v-model="bio"></textarea>
       <label for="tweet">New Tweet</label>
       <div class="new-tweet">
         <input id="tweetBox" type="text" placeholder="New Tweet" v-model="fullTweet.tweet"  @keyup.enter="addTweet"/>

@@ -8,7 +8,7 @@ const app = Vue.createApp({
    searchQuery:"",
    bio:"Excited future software engineer.",
    f: false,
-   td: false
+   nt: true
   }
      },
   methods:{
@@ -27,14 +27,13 @@ const app = Vue.createApp({
            }
        );
       this.fullTweet.tweet = "";
-      if(this.tweets.length>0){
-        this.td = true
-    }
-      if(this.tweets.length<=0)
-        this.td = false
+      if(this.tweets.length>0)
+        this.nt = false 
      },
     deleteTweet(index){
       this.tweets.splice(index,1)
+      if(this.tweets.length==0)
+        this.nt = true
     }
   },
  computed: {
