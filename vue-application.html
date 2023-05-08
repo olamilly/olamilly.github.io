@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>bird-app?</title>
+  <script src="https://unpkg.com/vue@3.2.47/dist/vue.global.js"></script>
+
+  <style>
+ body {
+  padding-bottom: 4rem;
+  background-image: linear-gradient(to left, #f0f6ff, #dddbf4);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 2rem;
+  letter-spacing: 0.6px;
+}
+
+em {
+  font-weight: bold;
+}
+
+.image-container {
+  overflow: hidden;
+}
+
+.image-container img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+h1, .results>h2 {
+  padding: .75rem;
+  background-color: #5919d9;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 900;
+  font-stretch: condensed;
+  line-height: 0.87;
+  letter-spacing: 1.1px;
+  color: #ffffff;
+}
+
+.user {
+  padding: 1.5rem;
+  font-size: .875rem;
+}
+
+.user-information {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.user-information .image-container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-right: 2rem;
+}
+
+.user-information h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.tweet {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  margin-bottom: 2px;
+  font-size: .875rem;
+}
+
+.tweets>.tweet{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tweet h3 {
+  font-weight: bold;
+}
+
+.settings {
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+  font-size: .875rem;
+}
+
+.settings h2 {
+  padding-bottom: 1.1875rem;
+  font-weight: bold;
+  line-height: 1.64;
+}
+
+.settings label {
+  font-weight: bold;
+  font-size: .75rem;
+}
+
+.settings input,
+.settings textarea,
+.settings button, #searchBox, #searchBar>button, #deleteBtn>button{
+  padding: 1rem;
+  border: solid 1px #7098f5;
+}
+
+.settings input::placeholder,
+.settings textarea::placeholder, #searchBox::placeholder {
+  color: #9b9b9b;
+}
+
+.settings input,
+.settings textarea {
+  margin-bottom: .625rem;
+}
+
+.new-tweet {
+  display: flex;
+}
+
+.new-tweet input {
+  flex-grow: 1;
+  margin-right: 2rem;
+  margin-bottom: 0;
+}
+
+.new-tweet button, #searchBar>button, #deleteBtn>button {
+  cursor: pointer;
+  border-radius: 2px;
+  background-color: #5919d973;
+  color: #ffffff;
+  transition: .25s;
+}
+
+.new-tweet button:hover, #searchBar>button:hover, #deleteBtn>button:hover {
+  background-color: #5919d9;
+}
+#searchBox{
+  width: 30%;
+  margin-right:5px;
+}
+#searchBar{
+display: flex;
+  justify-content:center;
+ }
+
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <h1>THE VUE VIEW</h1>
+    <div id="searchBar">
+    <input id="searchBox" type="text" placeholder="Search Tweets" v-model="searchQuery" @blur="search1" @keyup="search1" @input="search1"/> 
+    <button>Search</button>
+    </div>
+    <div class="results">
+      <h2 v-if="f">Search Results</h2>
+      <div class="tweet"v-for="twt in filteredTweets">
+        <h3>{{ twt.user }}</h3>
+        <p> {{ twt.tweet }}</p>
+      </div>
+    </div>
+    <div class="user">
+      <div class="user-information">
+        <div class="image-container">
+          <img src="https://content.codecademy.com/courses/what-is-vue/profile.jpeg" alt="profile picture">
+        </div>
+        <h3>{{ fullTweet.username }}</h3>
+      </div>
+      <div class="user-bio">
+        <em>Bio: </em> {{ bio }}.
+      </div>
+    </div>
+    <div class="tweets">
+      <h2 v-if="td">Tweets</h2>
+      <div class="tweet" v-for="(tw, index) in tweets">
+        <div>
+        <h3>{{ tw.user }}</h3>
+        <p> {{ tw.tweet }}</p>
+        </div>
+        <div id="deleteBtn">
+        <button @click="deleteTweet">Delete Tweet</button>
+        </div>  
+      </div>
+       <!--
+      <div class="tweet">
+        <h3>{{ fullTweet.username }}</h3>
+        <p>{{ fullTweet.tweet }}</p>
+      </div>  -->
+    </div>
+    <div class="settings">
+      <h2>Settings</h2>
+      <label for="username">Username</label>
+      <input type="text" placeholder="Username" v-model="fullTweet.username" />
+      <label for="bio">Bio</label>
+      <textarea value="bio" placeholder="Bio" v-model="bio"></textarea>
+      <label for="tweet">New Tweet</label>
+      <div class="new-tweet">
+        <input id="tweetBox" type="text" placeholder="New Tweet" v-model="fullTweet.tweet"  @keyup.enter="addTweet"/>
+        <button @click="addTweet">Add Tweet</button>
+      </div>
+    </div>
+  </div>
+
+<script src="app.js"></script>
+</body>
+</html>
