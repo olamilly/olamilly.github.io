@@ -8,18 +8,19 @@
   <style type="text/css">
     *{
       box-sizing: border-box;
+      font-weight: bold;
     }
     body{
       display: flex;
       flex-direction: column;  
       margin: 0px;
       width: 100%;
-      background-color:#30495f;
+      background-color: rgb(219, 218, 218);
     }
     h1,h2{
       text-align: center;
-      color: #1dcff6;
       margin-top: 0px;
+      color: black;
     }
     .details{
       display: flex;
@@ -29,20 +30,16 @@
       text-align: center;
       border-radius: 15px;
       width:100%;
-      background-color: #2f4e69;
-    }
-    a{
-      color:wheat;
+      background-color: #909091;
     }
     span{
-      background-color: #b3d8f1;
-      color: black;
+      background-color: rgb(94, 92, 92);
       margin:10px;
       padding:2.5px;
       border-radius: 3px;
     }
     p{
-      color:#dcedff;
+      color:white;
     }
     .row{
       display:flex;
@@ -50,21 +47,30 @@
     }
     section{
       margin:10px;
-      max-width:350px;
+      max-width:450px;
+    }
+    #footer{
+      width:100%;
+      background-color: rgb(94, 92, 92);
+      text-align: center;
+      padding:7.5px;
+      margin:0px;
+    }
+    a{
+      text-decoration: none;
     }
   </style>
 </head>
 <body>
   <h1>PROJECTS</h1>
 <div class="row">
-  <section id="todo" >
+  <a href="todolist.html"><section id="todo" >
     <article class="details">
       <h2>Basic To-Do List</h2>
       <p class="description">A simple to do list to help organize day to day activities.</p>  
-      <p class="link">Click <a href="todolist.html">here</a> to use my to do list.</p>
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
     </article>
-  </section>
+  </section></a>
   <section id="landing" >
     <article class="details">
       <h2>Product Landing Page Clone</h2>
@@ -74,38 +80,35 @@
       <p class="languages"><span>HTML</span> <span>CSS</span></p>
     </article></div>
     <div class="row">
-  <section id="github" >
+      <a href="profilecard.html"><section id="github" >
     <article class="details">
       <h2>Github Profile Generator</h2>
       <p class="description">Webpage that generates a profile card for you based on information available on your gitHub account. All it needs is your gitHub account username. Working on using APIs and fetching and posting data across the web. </p> 
-      <p class="link"><a href="profilecard.html">here</a> is the link</p>
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
     </article>
-  </section>
-  <section id="vueApp" >
+  </section></a>
+  <a href="vue-application.html"><section id="vueApp" >
     <article class="details">
       <h2>Vue.js basic "twitter" clone</h2>
       <p class="description">Started working with Vue.js(a frontend javascript framework). Made this to practice some basic vue components. Basic UI, not very hard to figure out </p> 
-      <p class="link">Check it out <a href="vue-application.html">here</a></p>
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
-  </section></div>
+  </section></a></div>
   <div class="row">
-  <section id="vueApp2" >
+    <a href="youtube-app.html"><section id="vueApp2" >
     <article class="details">
       <h2>Vue.js Youtube playlist Manager</h2>
       <p class="description">My second Vue.js project. An web application that helps users get youtube playlists based on a topic of their choice and watch the videos in that playlist. Working with REST APIs </p> 
-      <p class="link">Check it out <a href="youtube-app.html">here</a></p>
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
-  </section>
-  <section id="vueApp3" >
+  </section></a>
+  <a href="form-app.html"><section id="vueApp3" >
     <article class="details">
       <h2>Multi Step form</h2>
       <p class="description">My third Vue.js project. An web application that takes user information on various categories and creates a profile on that User. Complete with even a username and password level. Feel free to fork the code off my github repo and edit as you would like and embed into your own projects. </p> 
-      <p class="link">Check it out <a href="form-app.html">here</a></p>
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
-  </section></div>
+  </section></a></div>
+  <p id="footer">&copy; Tajudeen-mustapha Ismail Olamide.  </p>
 </body>
 </html>

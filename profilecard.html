@@ -81,6 +81,11 @@ margin:5px;
     function ready(){
     	icon =document.getElementById("searchIcon");
 	icon.addEventListener("click",usernameSearch);
+  document.getElementById("textBar").addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        usernameSearch();
+    }
+});
 	function usernameSearch(){
 		document.querySelector(".wrapper").style.display="none";
 		document.querySelector("h3").style.display="none";
