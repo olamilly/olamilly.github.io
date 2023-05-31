@@ -6,69 +6,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Main Page</title>
   <style type="text/css">
+    *{
+      box-sizing: border-box;
+    }
     body{
       display: flex;
-      flex-direction: column;   
+      flex-direction: column;  
       margin: 0px;
       width: 100%;
+      background-color:#30495f;
     }
     h1,h2{
       text-align: center;
-      background-color: lightcoral;
+      color: #1dcff6;
       margin-top: 0px;
     }
     .details{
-      text-align: left;
-      background-color: lightblue;
-      width: 40%;
-      border: 2px solid black;
-      border-radius: 5px;
-      margin-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: 2px solid grey;
+      text-align: center;
+      border-radius: 15px;
+      width:100%;
+      background-color: #2f4e69;
     }
-    
+    a{
+      color:wheat;
+    }
+    span{
+      background-color: #b3d8f1;
+      color: black;
+      margin:10px;
+      padding:2.5px;
+      border-radius: 3px;
+    }
+    p{
+      color:#dcedff;
+    }
+    .row{
+      display:flex;
+      justify-content: center;
+    }
+    section{
+      margin:10px;
+      max-width:350px;
+    }
   </style>
 </head>
 <body>
   <h1>PROJECTS</h1>
+<div class="row">
   <section id="todo" >
     <article class="details">
       <h2>Basic To-Do List</h2>
-      <p class="description">A simple to do list to help organize day to day activities.</p> 
-      <p class="languages">Designed using HTML, CSS and JavaScript.</p> 
+      <p class="description">A simple to do list to help organize day to day activities.</p>  
       <p class="link">Click <a href="todolist.html">here</a> to use my to do list.</p>
+      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
     </article>
   </section>
   <section id="landing" >
     <article class="details">
       <h2>Product Landing Page Clone</h2>
       <p class="description">I was able to very closely clone the Styling of a business (Original Trombones) product display page. Styling practice basically</p> 
-      <p class="languages">Designed using HTML and CSS.</p> 
       <p>Click <a href="https://product-landing-page.freecodecamp.rocks/" target="_blank">here</a> to view the original business' website on a new tab</p>
       <p class="link">Click <a href="landing.html">here</a> to check out my clone.</p>
-    </article>
+      <p class="languages"><span>HTML</span> <span>CSS</span></p>
+    </article></div>
+    <div class="row">
   <section id="github" >
     <article class="details">
       <h2>Github Profile Generator</h2>
       <p class="description">Webpage that generates a profile card for you based on information available on your gitHub account. All it needs is your gitHub account username. Working on using APIs and fetching and posting data across the web. </p> 
-      <p class="languages">Designed using HTML and CSS and JavaScript</p> 
       <p class="link"><a href="profilecard.html">here</a> is the link</p>
+      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
     </article>
   </section>
   <section id="vueApp" >
     <article class="details">
       <h2>Vue.js basic "twitter" clone</h2>
       <p class="description">Started working with Vue.js(a frontend javascript framework). Made this to practice some basic vue components. Basic UI, not very hard to figure out </p> 
-      <p class="languages">Designed using HTML and CSS and Vue.js</p> 
       <p class="link">Check it out <a href="vue-application.html">here</a></p>
+      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
-  </section>
+  </section></div>
+  <div class="row">
   <section id="vueApp2" >
     <article class="details">
       <h2>Vue.js Youtube playlist Manager</h2>
-      <p class="description">My second Vue.js project. An web application that helps users get youtube playlist based on a particular topic and watch the videos on that playlist. Working with REST APIs </p> 
-      <p class="languages">Designed using HTML and CSS and Vue.js</p> 
+      <p class="description">My second Vue.js project. An web application that helps users get youtube playlists based on a topic of their choice and watch the videos in that playlist. Working with REST APIs </p> 
       <p class="link">Check it out <a href="youtube-app.html">here</a></p>
+      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
   </section>
+  <section id="vueApp3" >
+    <article class="details">
+      <h2>Multi Step form</h2>
+      <p class="description">My third Vue.js project. An web application that takes user information on various categories and creates a profile on that User. Complete with even a username and password level. Feel free to fork the code off my github repo and edit as you would like and embed into your own projects. </p> 
+      <p class="link">Check it out <a href="form-app.html">here</a></p>
+      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
+    </article>
+  </section></div>
 </body>
 </html>
