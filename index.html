@@ -4,9 +4,14 @@
   <meta charset="utf-8">
   <meta http-equip="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@700&display=swap" rel="stylesheet">
   <title>Main Page</title>
   <style type="text/css">
     *{
+      font-family: 'Bebas Neue', sans-serif;
+font-family: 'Lato', sans-serif;
       box-sizing: border-box;
       font-weight: bold;
     }
@@ -19,27 +24,31 @@
     }
     h1,h2{
       text-align: center;
-      margin-top: 0px;
-      color: black;
+      margin-top: 7px;
+      color: rgb(61, 57, 57);
     }
     .details{
       display: flex;
       flex-direction: column;
       align-items: center;
-      border: 2px solid grey;
+      justify-content: space-around;
+      border: 3px solid grey;
       text-align: center;
-      border-radius: 15px;
+      border-radius: 10px;
       width:100%;
-      background-color: #909091;
+      height:400px;
+      padding:7px;
+      background-color: #bfbfc2;
     }
     span{
       background-color: rgb(94, 92, 92);
       margin:10px;
-      padding:2.5px;
+      padding:4px;
       border-radius: 3px;
     }
     p{
       color:white;
+      font-size: 18px;
     }
     .row{
       display:flex;
@@ -90,7 +99,7 @@
   <a href="vue-application.html"><section id="vueApp" >
     <article class="details">
       <h2>Vue.js basic "twitter" clone</h2>
-      <p class="description">Started working with Vue.js(a frontend javascript framework). Made this to practice some basic vue components. Basic UI, not very hard to figure out </p> 
+      <p class="description">Started working with Vue.js(a frontend javascript framework). Made this to practice some basic vue properties. Basic UI that allows the user to post messages/"tweets", delete and search actively. </p> 
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
   </section></a></div>
@@ -98,7 +107,7 @@
     <a href="youtube-app.html"><section id="vueApp2" >
     <article class="details">
       <h2>Vue.js Youtube playlist Manager</h2>
-      <p class="description">My second Vue.js project. An web application that helps users get youtube playlists based on a topic of their choice and watch the videos in that playlist. Working with REST APIs </p> 
+      <p class="description">My second Vue.js project. A web application that helps users get youtube playlists based on a topic of their choice and watch the videos in that playlist. Working with REST APIs. </p> 
       <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue JS</span></p>
     </article>
   </section></a>
