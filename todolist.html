@@ -6,19 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>JS practice!</title>
   <style>
-    body{
-    display:flex;
-    justify-content: center;
-    background-color:grey;
-    } 
+    *{
+      box-sizing: border-box;
+    }
     #container{
     display:flex;
     flex-direction: column;
     width:50%;
+    position: absolute;
+    max-width:300px;
     align-items:center;
     justify-content:center;
-    border:3px solid green;
-    background-color: white;
+    border-radius: 15px;
+    color:rgb(177, 182, 250);
+    border:3px solid  rgb(33, 33, 65);
+    background-color: rgb(62, 62, 78);
+    transform: translateX(50%);
     }
     .content{
     width:70%;
@@ -27,6 +30,9 @@
     align-items:center;
     justify-content:center;
     margin-bottom:25px;
+    }
+    button:hover{
+      cursor: pointer;
     }
     ul{
     display:flex;
@@ -47,22 +53,57 @@
     margin-bottom:25px;
     }
     input{
-    height:30px;
+    height:20px;
+    width:70%;
     margin:5px;
-    border-radius:3px;}
+    border-radius:3px;
+    color:rgb(177, 182, 250);
+ padding:2px;
+ background-color: rgb(115, 115, 138);}
+    #form{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     li{
     width:100%;
     margin:3px;
-    padding:3px;
     display:flex;
     justify-content:space-between;
     }
     h2{
     margin:0px;
-    border-bottom: 4px solid black;
+    border-bottom: 4px solid  rgb(33, 33, 65);
     width:100%;
     }
-  </style>
+
+#header2{
+  display:flex; 
+  justify-content:space-between;
+  width:100%;
+}  
+#tab{
+  text-align: center;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+  color:white;
+  width:100%;
+  background-color: rgb(33, 33, 65);
+  user-select: none;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+#tab:hover{
+  cursor: move;
+}
+button{
+ border: 2px solid rgb(33, 33, 65);
+ color:rgb(192, 195, 228);
+ border-radius: 3px;
+ padding:2px;
+ background-color: rgb(115, 115, 138);
+}
+</style>
   <script>  
     var a=1;
     function ready(){
@@ -71,6 +112,13 @@
     if (e.key=="Enter")
       addFunction();
     });
+
+    document.getElementById("tab").addEventListener("mousedown",function(){
+  document.getElementById("tab").addEventListener("mousemove",dragFunction)
+});
+document.addEventListener("mouseup",function(){
+  document.getElementById("tab").removeEventListener("mousemove",dragFunction)
+});
     };
     document.addEventListener("DOMContentLoaded",ready);
 
@@ -84,6 +132,7 @@
     };
     function addFunction(){
     var val = document.getElementById("inputBox").value;
+    if(val !="" && val!=" " ){
     var newList = document.createElement("li");
     newList.setAttribute("id",a);
     var item = document.createElement("h3");
@@ -97,16 +146,33 @@
     newButton.setAttribute("id",a);
     newButton.setAttribute("onClick","removeFunction(this)");
     document.getElementById(a).appendChild(newButton);
+    document.getElementById(a).style.display="flex";
+    document.getElementById(a).style.height="30px";
+    document.getElementById(a).style.alignItems="center";
     document.getElementById("inputBox").value="";
-    a=a+1;
+    a=a+1;}
     };
     function clearFunction(){
     document.getElementById("list").innerHTML="";
     };
+    function dragFunction({movementX, movementY}){
+      let getStyle = window.getComputedStyle(document.getElementById("container"));
+      let left = parseInt(getStyle.left);
+      let top = parseInt(getStyle.top);
+      l=left + movementX;
+      t=top + movementY;
+      l.toString();
+      t.toString();
+      l=l+"px";
+      t=t+"px";
+      document.getElementById("container").style.left=l;
+      document.getElementById("container").style.top=t;
+    }
   </script>
 </head> 
 <body>
   <section id='container'>
+    <div id="tab"><b>...</b></div>
     <h1>To-Do List</h1>
     <div id='add'>
       <h2>ADD ITEM</h2>
@@ -114,7 +180,7 @@
       <button onClick="addFunction()">Add</button></div> 
     </div>
     <div class='content'>
-        <h2 style="display:flex; justify-content:space-between;">TO-DO <button onClick="clearFunction()">clear list</button></h2>
+        <div id="header2"><h2>TO-DO </h2><button onClick="clearFunction()">clear list</button></div>
       <ul id="list" >
      </ul>
     </div>
