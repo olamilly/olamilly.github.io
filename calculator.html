@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equip="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>frontend practice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    .container{
+      width:25%;
+      border:2px solid;
+      border-radius: 10px;
+      padding:8px;
+      min-width:250px;
+      background-color: lightblue;
+    }
+    .screen{
+      border:2px solid;
+      background-color: black;
+      border-radius: 5px;
+      width:100%;
+      height: 150px;
+    }
+    .buttons{
+      width:100%;
+    }
+    .numbers{
+      display:flex;
+      flex-direction:column;
+    }
+    .numbers>div{
+      display:flex;
+      justify-content: space-between;
+    }
+    .operations, .controls, .footer{
+      display:flex;
+      justify-content: space-between;
+    }
+    p{
+      border:2px solid;
+      width:33%;
+      margin:0px;
+      padding:8%;
+      margin:2px;
+      text-align: center;
+      background-color: white;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    #lastRow>p, .operations>p{
+      width:25%;
+    }
+    .keyboard{
+      width:100%;
+      display:flex;
+      justify-content: space-between;
+    }
+    #mini{
+      font-size: 30px;
+      min-height: 30px;
+      color:white;
+      text-align: right;
+    }
+    #main{
+      min-height: 70px;
+      color:white;
+      text-align: right;
+      font-size: 50px;
+      padding-top:55px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  </style>
+  <script>
+  function ready(){
+    var element = document.querySelectorAll("p");
+    getData(element);
+  };
+  document.addEventListener("DOMContentLoaded",ready);
+  function getData(c) {
+    for (var i = 0; i < 18; i++){
+      c[i].addEventListener("click",event=>{
+        passData(event.target.getAttribute('id'))
+      })
+    }
+  }
+  var firstData;
+  var secondData;
+  var on=0;
+  var currentOperation="";
+  function passData(c)
+  {
+    if (c=='1'|| c=='2'|| c=='3'||c=='4'||c=='5'||c=='6'||c=='7'||c=='8'||c=='9'||c=='0')
+    {
+      if(currentOperation =="")
+      {
+        var data = document.getElementById("main").innerHTML;
+        document.getElementById("main").innerHTML=data+c;
+
+      }
+      if(currentOperation !="")
+      {
+        var data = document.getElementById("main").innerHTML;
+        document.getElementById("main").innerHTML=data+c;
+        secondData = document.getElementById("main").innerHTML;
+      }
+      on=0;
+    }
+
+    if (c=="clear")
+    {
+      document.getElementById("main").innerHTML="";
+      document.getElementById("mini").innerHTML="";
+      firstData="";
+      secondData="";
+      currentOperation=""
+      on=0;
+    }
+
+    if (c=="delete")
+    {
+      if(on==0){
+      document.getElementById("main").innerHTML = document.getElementById("main").innerHTML.slice(0,document.getElementById("main").innerHTML.length-1);}
+    }
+    if (c=='plus'|| c=='minus'|| c=='multiply'||c=='divide')
+    {
+      if(document.getElementById("mini").innerHTML!=""&&document.getElementById("main").innerHTML!=""&&secondData!=""){
+        secondData=document.getElementById("main").innerHTML;
+        var a=calculate(firstData, secondData, currentOperation);
+        firstData = a;
+        var op = document.getElementById(c).innerHTML;
+        document.getElementById("mini").innerHTML=a+" "+op+" ";
+        document.getElementById("main").innerHTML="";
+        currentOperation=c;
+      }
+      else{
+        firstData = document.getElementById("main").innerHTML;
+        var op = document.getElementById(c).innerHTML;
+        var firstHalf = firstData+" "+op+" ";
+        document.getElementById("mini").innerHTML=firstHalf;
+        document.getElementById("main").innerHTML="";
+        currentOperation=c;
+      }
+      on=0;
+    }
+    if (c=="equals"&&currentOperation!="")
+    {
+      secondData=document.getElementById("main").innerHTML;
+      var op = document.getElementById("mini").innerHTML;
+      document.getElementById("mini").innerHTML=op+secondData;
+      document.getElementById("main").innerHTML="";
+      var a=calculate(firstData, secondData, currentOperation);
+      document.getElementById("main").innerHTML=a;
+      firstData=a;
+      secondData="";
+      on=1;
+    }
+    if (c=="decimal")
+    {
+      if(document.getElementById("main").innerHTML != "")
+      {
+        document.getElementById("main").innerHTML=document.getElementById("main").innerHTML+document.getElementById("decimal").innerHTML;
+      }
+    }
+    on=0;
+  }
+    function calculate(x, y, z){
+      a = Number(x);
+      b= Number(y);
+      console.log(a);
+      console.log(b);
+      if (z=="plus"){
+        return(a+b);
+      }
+      if (z=="minus"){
+        return(a-b);
+      }
+      if (z=="multiply"){
+        return(a*b);
+      }
+      if (z=="divide"){
+        return(a/b);
+      }
+    }
+ </script>
+</head>
+<body>
+ <div class="container">
+   <div class="screen">
+    <div id=mini></div>
+    <div id=main></div>
+   </div>
+   <div class="keyboard">
+   <div class="buttons">
+    <div class="controls">
+      <p id="clear">AC</p><p id="delete">Del</p>
+    </div>
+    <div class="numbers">
+      <div>
+      <p id="1">1</p>
+      <p id="2">2</p>
+      <p id="3">3</p>
+      </div>
+      <div>
+      <p id="4">4</p>
+      <p id="5">5</p>
+      <p id="6">6</p>
+      </div>
+      <div id="lastRow">
+      <p id="7">7</p>
+      <p id="8">8</p>
+      <p id="9">9</p>
+      <p id="0">0</p></div>
+    </div>
+    <div class="operations">
+      <p id="plus">+</p>
+      <p id="minus">-</p>
+      <p id="multiply">*</p>
+      <p id="divide">/</p>
+    </div>
+    <div class="footer">
+     <p id="decimal">.</p>
+     <p id="equals">=</p>
+   </div>
+   </div>
+ </div>
+ </div>
+</body>
