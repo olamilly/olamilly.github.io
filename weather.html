@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <style>
+      *{
+        font-family: 'Bree Serif', serif;
+        font-size: large;
+        box-sizing: border-box;
+      }
+      html{ 
+        min-height: 100%; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      body{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:60%;
+        background-image: linear-gradient(to top, lightblue , lightskyblue);
+      }
+      .container{
+        border:2.5px solid rgb(117, 166, 182);
+        border-radius:7px;
+        width:100%;
+        max-width:350px;
+        background-color: rgb(243, 236, 236);
+        box-shadow: 6px 6px grey;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      #Logo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+      }
+      header{
+        display:flex;
+        height:60px;
+        align-items: center;
+        justify-content: space-between;
+        width:100%;
+        padding:0.8rem .4rem .4rem;
+        border-bottom: .5px solid rgb(55, 112, 131); 
+      }
+      form{
+        width:100%;
+        display:flex;
+        flex-direction: column;
+        padding:.7rem;
+        align-items: center;
+      }
+      #searchBar{
+        display:flex;
+        width:100%;
+        justify-content: space-around;
+      }
+      #locationBtn{
+        width:100%;
+        padding: .5rem;
+        border-radius:7px;
+        border:1.5px solid rgb(55, 112, 131);
+        background-color: rgb(168, 212, 226);
+      }
+      input{
+       width:75%;
+        padding:.5rem;
+        border-radius:7px;
+        outline: none;
+        border:1.5px solid rgb(55, 112, 131);
+        background-color: rgb(168, 212, 226);
+      }
+      #searchBar>button{
+        padding:.5rem;
+        border-radius:7px;
+        background-color: rgb(168, 212, 226);
+        border:1.5px solid rgb(55, 112, 131);
+      }
+      .errorBox{
+        width:100%;
+        text-align:center;
+        background-color: red;
+        color:white;
+        margin-bottom:5px;
+        border-radius:3px;
+        display: flex;
+        padding-left:4px;
+        justify-content: space-between;
+      }
+      .errorBox>box-icon{
+        height:30px;
+        width:30px;
+        fill:white;
+      }
+      .errorBox>box-icon:hover, #searchBar>button:hover, #locationBtn:hover{
+        cursor: pointer;
+      }
+      h4 {
+        width: 100%; 
+        text-align: center; 
+        border-bottom: .5px solid rgb(55, 112, 131); 
+        line-height: 0.1em;
+        margin: 20px 0;
+        color:rgb(117, 166, 182); 
+      } 
+      h2{
+       
+        text-align: center;
+        color:rgb(117, 166, 182);
+        font-size:35px ;
+      }
+      h4 span { 
+          background:rgb(243, 236, 236); 
+          padding:0 10px; 
+      }
+      box-icon{
+        display: inline;
+        height:30px;
+        width:30px;
+        fill:rgb(117, 166, 182);
+      }
+      #location, .footerBox>span{
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+      }
+      #location{
+        font-size:30px;
+      }
+      footer{
+        width:100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        border-top: .5px solid rgb(55, 112, 131);
+      }
+      .footerBox{
+        text-align: center;
+      }
+      #divider{
+        height:100px;
+        border-right:.5px solid rgb(55, 112, 131);
+      }
+      .inactive{
+        display:none;
+      }
+     .active2{
+        width:100%;
+        display:flex;
+        flex-direction: column;
+        padding:.7rem;
+        align-items: center;
+        padding-top: 0;
+      }
+      h1, h1>span{
+        margin: 0;
+        font-size: 85px;
+      }
+      #loader{
+        width:100%;
+        height:0px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      
+    </style>
+    <script> 
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+          <span class="inactive" id="back">
+            <box-icon name='arrow-back'></box-icon>
+          </span>
+          <span id="Logo">
+            <img src="weatherIcons/weather.svg" alt="Logo">
+            <h2>Weather App</h2>
+          </span>
+        </header>
+        
+        <div id="loader"><svg class="inactive" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 50 50" stroke="rgb(117, 166, 182)">
+          <g fill="none" fill-rule="evenodd">
+              <g transform="translate(1 1)" stroke-width="2">
+                  <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+                  <path d="M36 18c0-9.94-8.06-18-18-18">
+                      <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
+                  </path>
+              </g>
+          </g>
+      </svg></box-icon></div>
+        <form>
+          <div class="errorBox inactive" id="eb1"><div id="error"></div><box-icon name='x'></box-icon></div>
+          <div class="errorBox inactive" id="eb2"><div id="error2"></div><box-icon name='x'></box-icon></div>
+          <div id="searchBar" ><input placeholder="Enter a City..." required/><button>Search</button></div>
+          <h4><span>OR</span></h4>
+          <button id="locationBtn">Use Current Location</button>
+        </form>
+
+        <div id="result" class="inactive">
+          <img src="weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
+          <div><h1><span id="mainTemp">17</span>°C</h1></div>
+          <div id="description">Sunny</div>
+          <div id="location">LAGOS, NG</div>
+        </div>
+        
+        <footer class="inactive">
+          <div class="footerBox">FEELS LIKE
+            <box-icon type='solid' name='thermometer'></box-icon>
+            <div><span id="realTemp">17</span><span>°C</span></div>
+          </div>
+          <div id="divider"></div>
+          <div class="footerBox">HUMIDITY
+            <box-icon type='solid' name='droplet-half'></box-icon>
+            <span id="humidity">80%</span>
+          </div>
+        </footer>
+    </div>
+    <script>
+      function ready()
+      {
+        var url;
+        var city;
+        const container = document.querySelector(".container");
+        const backButton = container.querySelector("#back");
+        const input = container.querySelector("input");
+        const searchButton = container.querySelector("#searchBar>button");
+        const form = container.querySelector("form");
+        const result = container.querySelector("#result");
+        const footer = container.querySelector("footer");
+        const locationBtn= container.querySelector("#locationBtn");
+        const image= container.querySelector("#result>img");
+        locationBtn.addEventListener("click", function(){
+          if (navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(onsuccess, onerror)
+          }
+          else{
+            alert("Your Browser Does not support Geolocator...Enter your city manually");
+          }
+        });
+        function onsuccess(position){
+          var lat = position.coords.latitude;
+          var long = position.coords.longitude;
+          url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=metric&appid=d60e18177456df0b34c560dfe924dcbb";
+          fetchData();
+          form.classList.add("inactive");
+          document.querySelector("#loader").style.height="150px";
+          document.querySelector("svg").classList.remove("inactive");
+        }
+        function onerror(error){
+          document.getElementById("error2").innerHTML=error.message + ". Check Location Settings and try again";
+          document.getElementById("eb2").classList.toggle("inactive");
+        }
+        document.querySelector("#eb1>box-icon").addEventListener("click", function(){
+          document.getElementById("eb1").classList.toggle("inactive");
+        })
+        document.querySelector("#eb2>box-icon").addEventListener("click", function(){
+          document.getElementById("eb2").classList.toggle("inactive");
+        })
+        backButton.addEventListener("click", function(){ 
+          backButton.classList.toggle("inactive");
+          form.classList.toggle("inactive");
+          result.classList.replace("active2", "inactive");
+          footer.classList.toggle("inactive");
+        })
+        function startSearch(){
+          city = input.value;
+          if(city !=""){
+            url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid=d60e18177456df0b34c560dfe924dcbb";
+            fetchData();
+          }
+          form.classList.add("inactive");
+          document.querySelector("#loader").style.height="150px";
+          document.querySelector("svg").classList.remove("inactive");
+          input.value="";
+          
+        }
+        async function fetchData(){
+
+          try {
+          const response = await fetch(url).then(response => response.json()).then(result => weatherDetails(result));
+          } catch (error) {
+          // TypeError: Failed to fetch
+          document.querySelector("svg").classList.add("inactive");
+          document.querySelector("#loader").innerHTML="<p style='text-align: center;color:red; padding:5px;'>Failed to get Data. Check your network, refresh the page and try again.</p>";
+          console.log('There was an error', error);
+          }
+          
+        }
+        function weatherDetails(apiResult){
+            if (apiResult.cod == 404){
+              document.querySelector("#loader").style.height="0px";
+              document.querySelector("svg").classList.add("inactive");
+              form.classList.toggle("inactive");
+              document.getElementById("error").innerHTML = city+ " not found. Please enter a valid city and try again";
+              document.getElementById("eb1").classList.toggle("inactive");
+            }
+            else{
+              console.log(apiResult);
+              showResult(apiResult);
+            }
+        }
+        function showResult(r){
+          var mt = r.main.temp;
+          var rt = r.main.feels_like;
+          var hum = r.main.humidity;
+          var ct=r.name;
+          var country=r.sys.country;
+          var desc = r.weather[0].description;
+          var weatherID  = r.weather[0].id;
+          console.log(ct, country, weatherID) ;
+          document.querySelector("#mainTemp").innerHTML=Math.floor(mt);
+          document.querySelector("#description").innerHTML=desc;
+          document.querySelector("#location").innerHTML="<box-icon type='solid' name='map'></box-icon>"+ct+", "+country;
+          document.querySelector("#realTemp").innerHTML=rt;
+          document.querySelector("#humidity").innerHTML=hum+"%";
+          if (weatherID == 800){
+            image.src="weatherIcons/day.svg";
+          }
+          if (weatherID >800 && weatherID<900){
+            image.src="weatherIcons/cloudy-day-2.svg";
+          }
+          if (weatherID >=200 && weatherID<300){
+            image.src="weatherIcons/thunder.svg";
+          }
+          if (weatherID >=300 && weatherID<400){
+            image.src="weatherIcons/rainy-1.svg";
+          }
+          if (weatherID >=500 && weatherID<600){
+            image.src="weatherIcons/rainy-6.svg";
+          }
+          if (weatherID >=600 && weatherID<700){
+            image.src="weatherIcons/snowy-6.svg";
+          }
+          if (weatherID >=700 && weatherID<800){
+            image.src="weatherIcons/cloudy.svg";
+          }
+          console.log(weatherID/100);
+          document.querySelector("#loader").style.height="0px";
+          document.querySelector("svg").classList.add("inactive");
+          backButton.classList.toggle("inactive");
+          result.classList.replace("inactive", "active2");
+          //form.classList.toggle("inactive");
+          footer.classList.toggle("inactive");
+        }
+
+        input.addEventListener("keyup",e=>{
+          if(e.key == "Enter"){
+            startSearch();
+          }
+        })
+        searchButton.addEventListener("click", startSearch);
+      };
+      document.addEventListener("DOMContentLoaded",ready);
+      
+    </script>
+</body>
+</html>
