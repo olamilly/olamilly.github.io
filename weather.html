@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <title>Weather App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type='text/javascript' src='config.js'></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
@@ -253,7 +254,7 @@
         function onsuccess(position){
           var lat = position.coords.latitude;
           var long = position.coords.longitude;
-          url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=metric&appid=d60e18177456df0b34c560dfe924dcbb";
+          url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=metric&appid="+config.weather_key;
           fetchData();
           form.classList.add("inactive");
           document.querySelector("#loader").style.height="150px";
@@ -278,7 +279,8 @@
         function startSearch(){
           city = input.value;
           if(city !=""){
-            url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid=d60e18177456df0b34c560dfe924dcbb";
+            console.log();
+            url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+config.weather_key;
             fetchData();
           }
           form.classList.add("inactive");
