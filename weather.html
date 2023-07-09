@@ -279,7 +279,6 @@
         function startSearch(){
           city = input.value;
           if(city !=""){
-            console.log();
             url = "https://api.openweathermap.org/data/2.5/weather?q="+city+"&units=metric&appid="+config.weather_key;
             fetchData();
           }
@@ -310,7 +309,6 @@
               document.getElementById("eb1").classList.toggle("inactive");
             }
             else{
-              console.log(apiResult);
               showResult(apiResult);
             }
         }
@@ -322,7 +320,7 @@
           var country=r.sys.country;
           var desc = r.weather[0].description;
           var weatherID  = r.weather[0].id;
-          console.log(ct, country, weatherID) ;
+          console.log(ct, country) ;
           document.querySelector("#mainTemp").innerHTML=Math.floor(mt);
           document.querySelector("#description").innerHTML=desc;
           document.querySelector("#location").innerHTML="<box-icon type='solid' name='map'></box-icon>"+ct+", "+country;
@@ -349,7 +347,6 @@
           if (weatherID >=700 && weatherID<800){
             image.src="weatherIcons/cloudy.svg";
           }
-          console.log(weatherID/100);
           document.querySelector("#loader").style.height="0px";
           document.querySelector("svg").classList.add("inactive");
           backButton.classList.toggle("inactive");
