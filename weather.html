@@ -61,6 +61,14 @@
         flex-direction: column;
         padding:.7rem;
         align-items: center;
+        padding-bottom:0;
+      }
+      #lBtnholder{
+        width:100%;
+        display:flex;
+        padding:.7rem;
+        padding-top:0;
+        justify-content: center;
       }
       #searchBar{
         display:flex;
@@ -207,8 +215,8 @@
           <div class="errorBox inactive" id="eb2"><div id="error2"></div><box-icon name='x'></box-icon></div>
           <div id="searchBar" ><input placeholder="Enter a City..." required/><button>Search</button></div>
           <h4><span>OR</span></h4>
-          <button id="locationBtn">Use Current Location</button>
         </form>
+        <div id="lBtnholder"><button id="locationBtn">Use Current Location</button></div>
 
         <div id="result" class="inactive">
           <img src="weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
@@ -243,6 +251,7 @@
         const footer = container.querySelector("footer");
         const locationBtn= container.querySelector("#locationBtn");
         const image= container.querySelector("#result>img");
+        const lbholder = container.querySelector("#locationBtn");
         locationBtn.addEventListener("click", function(){
           if (navigator.geolocation){
             navigator.geolocation.getCurrentPosition(onsuccess, onerror)
@@ -257,6 +266,7 @@
           url = "https://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+long+"&units=metric&appid="+config.weather_key;
           fetchData();
           form.classList.add("inactive");
+          lbholder.classList.add("inactive");
           document.querySelector("#loader").style.height="150px";
           document.querySelector("svg").classList.remove("inactive");
         }
@@ -273,6 +283,7 @@
         backButton.addEventListener("click", function(){ 
           backButton.classList.toggle("inactive");
           form.classList.toggle("inactive");
+          lbholder.classList.toggle("inactive");
           result.classList.replace("active2", "inactive");
           footer.classList.toggle("inactive");
         })
@@ -283,6 +294,7 @@
             fetchData();
           }
           form.classList.add("inactive");
+          lbholder.classList.add("inactive");
           document.querySelector("#loader").style.height="150px";
           document.querySelector("svg").classList.remove("inactive");
           input.value="";
@@ -305,6 +317,7 @@
               document.querySelector("#loader").style.height="0px";
               document.querySelector("svg").classList.add("inactive");
               form.classList.toggle("inactive");
+              lbholder.classList.toggle("inactive");
               document.getElementById("error").innerHTML = city+ " not found. Please enter a valid city and try again";
               document.getElementById("eb1").classList.toggle("inactive");
             }
