@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>RockPaperScissors</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bree+Serif&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <style>
+        *{
+            font-family: 'Bree Serif', serif;
+            box-sizing: border-box;
+        }
+        html{
+            background-color: rgb(246, 242, 242);
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+            min-height: 650px;
+        }
+        h1{
+            width: 100%;
+            margin-top: 0px;
+            text-align: center;
+            position: fixed;
+            top: 0;
+            background-color: white;
+            box-shadow: 1px 1px lightgray;
+            padding-bottom: .5rem;
+        }
+        .scoreBoard{
+            width:50%;
+            min-width: 550px;
+            display: flex;
+            border: 3px solid lightblue;
+            border-radius: 7px;
+            justify-content: space-evenly;
+            padding:5px;
+            background-color: lightblue;
+            box-shadow: 3px 3px dimgray;
+        }
+        .scoreBox{
+            text-align: center;
+        }
+        #name,#ai, #userScore, #computerScore{
+            background-color: blue;
+            color: white;
+            border: 1px solid blue;
+            border-radius: 5px;
+            padding: 2px;
+            width: 15rem;
+            box-shadow: 3px 3px dimgray;
+        }
+        #userScore, #computerScore{
+            height:7rem;
+            font-size: 70px;
+            margin-top: 10px;
+            margin-bottom: 0px;
+        }
+        .form{
+            display: flex;
+            text-align: center;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid lightblue;
+            background-color: lightblue;
+            width:25%;
+            box-shadow: 3px 3px dimgray;
+            min-width: 250px;
+            border-radius: 7px;
+        }
+        #start, .buttonGroup>input, #banner>input{
+            padding:4px;
+            border: 1px solid gray;
+            border-radius: 3px;
+            box-shadow: 2px 2px dimgray;
+        }
+        #username{
+            border: 1px solid gray;
+            box-shadow: 2px 2px dimgray;
+            padding:3px;
+            width:100%;
+            border-radius: 3px;
+            outline:none;
+        }
+        #mode{
+            display: flex;
+            width:100%;
+            justify-content: space-evenly;
+            margin-bottom: 10px;
+        }
+        h4, #username, h2{
+            margin-top: 4px;
+            margin-bottom: 0;
+        }
+        .gameBody{
+            display: flex;
+            border:2px solid lightblue;
+            width:80%;
+            min-width: 600px;
+            box-shadow: 3px 3px dimgray;
+            background-color: lightblue;
+            border-radius: 7px;
+            justify-content: space-evenly;
+        }
+        .controls{
+            display: flex;
+        }
+        .controls>p{
+            border:4px solid lightblue;
+            border-radius: 50%;
+            margin:0;
+        }
+        .footer{
+            border-radius: 7px;
+            border:2px solid lightblue;
+            box-shadow: 3px 3px dimgray;
+            text-align: center;
+            background-color: lightblue;
+        }
+        .buttonGroup>input, #banner>input{
+            margin: .5rem;
+        }
+        .inactive{
+            display: none;
+        }
+        .error{
+           background-color: red; 
+           color:white;
+           width:100%;
+           display: none;
+           align-items: center;
+           justify-content: space-between;
+           padding-left: 2px;
+           text-align: center;
+           border-radius: 4px;
+        }
+        box-icon{
+            height:20px;
+            width:20px;
+            fill:white;
+        }
+        box-icon:hover{
+            cursor: pointer;
+        }
+        #banner{
+            border-radius: 7px;
+            border:2px solid lightblue;
+            box-shadow: 3px 3px dimgray;
+            text-align: center;
+            background-color: lightblue;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            display: none;
+        }
+        img{
+            height: 5rem;
+            width: 5rem;
+            margin:5px;
+            border: 4px solid black;
+            border-radius: 50%;
+            background-color: #2B2B5F;
+            box-shadow: 3px 3px dimgray;
+        }
+        .userControls, input, button{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Rock Paper Scissors</h1>
+    <div class="scoreBoard inactive">
+        <div class="scoreBox">
+            <h2 id="name" >name</h2>
+            <p id="userScore" style="background-color: green; border: 1px solid green;">0</p>
+        </div>
+        <div class="scoreBox" >
+            <h2 id="ai" >AI</h2>
+            <p id="computerScore" style="background-color: red; border: 1px solid red;">0</p>
+        </div>
+    </div>
+    <div id="banner">
+        <h2 >YOU WON!</h2>
+        <input type="submit"id="newGame" value="New Game">
+    </div>
+    <div class="form">
+        <div class="error"> fill in all required information<box-icon name='x'></box-icon></div>
+        <div style="padding:5px;">
+        <h2><label for="username">What is your name?</label></h2>
+        <input name="username" id=username type="text" placeholder="Name" required/>
+        <h4>Game mode</h4>
+        <div id="mode">
+            <span><input type="radio" id="five" name="gm" class="gameMode" value="5">
+            <label for="html">5 Rounds</label></span>
+            <span><input type="radio" id="ten" name="gm" class="gameMode" value="10">
+            <label for="css">10 Rounds</label></span>
+        </div>
+        <button id="start">start</button></div>
+    </div>
+    <div class="footer inactive">
+        <h4 id=rn>Round <span></span></h4>
+        <p id="comment">You won this round</p>
+        <div class="buttonGroup">
+            <input type="submit" id="next" value="Next Round">
+            <input type="submit" id="reset" value="Restart Game">
+        </div>
+    </div>
+    <div class="gameBody inactive">
+        <div>
+            <h3 style="width:100%; text-align:center;" id=n2>USER</h3>
+            <div class="controls">
+                <p class="userControls" id="1"><img src="assets/rock3.png" /></p>
+                <p class="userControls" id="2"><img src="assets/paper2.png" /></p>
+                <p class="userControls" id="3"><img src="assets/scissors2.png" /></p>
+            </div>
+        </div>
+        <div>
+            <h3 style="width:100%; text-align:center;">AI</h3>
+            <div class="controls">
+                <p id="4"><img src="assets/rock3.png" /></p>
+                <p  id="5"><img src="assets/paper2.png" /></p>
+                <p  id="6"><img src="assets/scissors2.png" /></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const scoreBoard = document.querySelector(".scoreBoard");
+        const form = document.querySelector(".form");
+        const gameBody = document.querySelector(".gameBody");
+        const footer = document.querySelector(".footer");
+        var round=0;
+        var mode=0;
+        var name="";
+        var userScore =0;
+        var computerScore =0;
+        var radios = document.querySelectorAll(".gameMode");
+        for(radio in radios) {
+         radios[radio].onclick = function() {
+            mode = this.value;}}
+        document.getElementById("start").addEventListener("click", ()=>{
+            if(document.getElementById("username").value=="" || mode==0){
+                document.querySelector(".error").style.display="flex";
+            }
+            if (document.getElementById("username").value!="" && mode!=0){
+                name=document.getElementById("username").value;
+                startGame();
+            }
+        })
+
+        function startGame(){
+            form.classList.toggle("inactive");
+            scoreBoard.classList.toggle("inactive");
+            gameBody.classList.toggle("inactive");
+            document.getElementById("name").innerText=name;
+            document.getElementById("n2").innerText=name
+        }
+        
+        document.querySelector("box-icon").onclick=function(){
+            document.querySelector(".error").style.display="none";
+        };
+
+        var controls = document.querySelectorAll(".userControls");
+        for(var i=0; i<3; i++) {
+            controls[i].addEventListener("click", function b(){makeMove(this.id)});
+        }
+
+        function makeMove(a){
+            if(round != mode){
+            round = round + 1;
+            var computerMove=Math.floor(Math.random() * 3) + 4;
+            document.getElementById(a).style.border="4px solid blueviolet";
+            document.getElementById(computerMove).style.border="4px solid blueviolet";
+            document.querySelector("#rn>span").innerText=round;
+            if (a==1){
+                document.getElementById("1").style.pointerEvents="none";
+                document.getElementById("2").style.pointerEvents="none";
+                document.getElementById("3").style.pointerEvents="none";
+                switch(computerMove){
+                    case 4:
+                        footer.classList.toggle("inactive");
+                        document.getElementById("comment").innerHTML="This round ends in a tie";
+                        break;
+                    case 5:
+                        footer.classList.toggle("inactive");
+                        computerScore = computerScore+1;
+                        document.getElementById("computerScore").innerHTML=computerScore;
+                        document.getElementById("comment").innerHTML="The computer wins this round";
+                        break;
+                    case 6:
+                        footer.classList.toggle("inactive");
+                        userScore = userScore +1;
+                        document.getElementById("userScore").innerHTML=userScore;
+                        document.getElementById("comment").innerHTML="You won this round";
+                        break;
+                }
+            }
+            if (a==2){
+                document.getElementById("1").style.pointerEvents="none";
+                document.getElementById("2").style.pointerEvents="none";
+                document.getElementById("3").style.pointerEvents="none";
+                switch(computerMove){
+                    case 4:
+                        footer.classList.toggle("inactive");
+                        userScore = userScore +1;
+                        document.getElementById("userScore").innerHTML=userScore;
+                        document.getElementById("comment").innerHTML="You won this round";
+                        break;
+                    case 5:
+                        footer.classList.toggle("inactive");
+                        document.getElementById("comment").innerHTML="This round ends in a tie";
+                        break;
+                    case 6:
+                        footer.classList.toggle("inactive");
+                        computerScore = computerScore+1;
+                        document.getElementById("computerScore").innerHTML=computerScore;
+                        document.getElementById("comment").innerHTML="The computer wins this round";
+                        break;   
+                }
+            }
+            if (a==3){
+                document.getElementById("1").style.pointerEvents="none";
+                document.getElementById("2").style.pointerEvents="none";
+                document.getElementById("3").style.pointerEvents="none";
+                switch(computerMove){
+                    case 4:
+                        footer.classList.toggle("inactive");
+                        computerScore = computerScore+1;
+                        document.getElementById("computerScore").innerHTML=computerScore;
+                        document.getElementById("comment").innerHTML="The computer wins this round";
+                        break;
+                    case 5:
+                        footer.classList.toggle("inactive");
+                        userScore = userScore +1;
+                        document.getElementById("userScore").innerHTML=userScore;
+                        document.getElementById("comment").innerHTML="You won this round";
+                        break;
+                    case 6:
+                        footer.classList.toggle("inactive");
+                        document.getElementById("comment").innerHTML="This round ends in a tie";
+                        break;
+                }
+            }
+            }
+            if(round == mode){
+                footer.classList.toggle("inactive");
+                document.querySelector("#banner").style.display="flex";
+                if (computerScore>userScore){
+                    document.querySelector("#banner>h2").innerText="COMPUTER WON :(";
+                }
+                if (computerScore<userScore){
+                    document.querySelector("#banner>h2").innerText="YOU WON! :)";
+                }
+                if (computerScore==userScore && mode!=0){
+                    document.querySelector("#banner>h2").innerText="IT'S A TIE :|";
+                }
+            }
+        }
+
+        document.getElementById("next").addEventListener("click", ()=>{
+            footer.classList.toggle("inactive");
+            var c = document.querySelectorAll(".controls>p");
+            for(var i=0; i<6; i++) {
+                c[i].style.pointerEvents="auto";
+                c[i].style.border="4px solid lightblue";  
+            }
+        })
+        
+        document.getElementById("reset").addEventListener("click", ()=>{
+            footer.classList.toggle("inactive");
+            var c = document.querySelectorAll(".controls>p");
+            for(var i=0; i<6; i++) {
+                c[i].style.pointerEvents="auto";
+                c[i].style.border="4px solid lightblue";
+            }
+            userScore = 0;
+            computerScore = 0;
+            document.getElementById("computerScore").innerHTML=computerScore;
+            document.getElementById("userScore").innerHTML=userScore;
+            round=0;
+
+        });
+        
+        document.getElementById("newGame").addEventListener("click", ()=>{
+            
+            var c = document.querySelectorAll(".controls>p");
+            for(var i=0; i<6; i++) {
+                c[i].style.pointerEvents="auto";
+                c[i].style.border="4px solid lightblue"
+            }
+            gameBody.classList.toggle("inactive");
+            userScore = 0;
+            computerScore = 0;
+            document.getElementById("computerScore").innerHTML=computerScore;
+            document.getElementById("userScore").innerHTML=userScore;
+            scoreBoard.classList.toggle("inactive");
+            form.classList.toggle("inactive");
+            document.querySelector(".error").style.display="none";
+            document.getElementById("username").value=name;
+            round=0;
+            document.querySelector("#banner").style.display="none";
+        });
+
+    </script>
+</body>
+</html>

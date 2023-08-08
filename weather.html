@@ -195,7 +195,7 @@
             <box-icon name='arrow-back'></box-icon>
           </span>
           <span id="Logo">
-            <img src="weatherIcons/weather.svg" alt="Logo">
+            <img src="assets/weatherIcons/weather.svg" alt="Logo">
             <h2>Weather App</h2>
           </span>
         </header>
@@ -219,7 +219,7 @@
         <div id="lBtnholder"><button id="locationBtn">Use Current Location</button></div>
 
         <div id="result" class="inactive">
-          <img src="weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
+          <img src="assets/weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
           <div><h1><span id="mainTemp">17</span>°C</h1></div>
           <div id="description">Sunny</div>
           <div id="location">LAGOS, NG</div>
@@ -340,25 +340,25 @@
           document.querySelector("#realTemp").innerHTML=rt;
           document.querySelector("#humidity").innerHTML=hum+"%";
           if (weatherID == 800){
-            image.src="weatherIcons/day.svg";
+            image.src="assets/weatherIcons/day.svg";
           }
           if (weatherID >800 && weatherID<900){
-            image.src="weatherIcons/cloudy-day-2.svg";
+            image.src="assets/weatherIcons/cloudy-day-2.svg";
           }
           if (weatherID >=200 && weatherID<300){
-            image.src="weatherIcons/thunder.svg";
+            image.src="assets/weatherIcons/thunder.svg";
           }
           if (weatherID >=300 && weatherID<400){
-            image.src="weatherIcons/rainy-1.svg";
+            image.src="assets/weatherIcons/rainy-1.svg";
           }
           if (weatherID >=500 && weatherID<600){
-            image.src="weatherIcons/rainy-6.svg";
+            image.src="assets/weatherIcons/rainy-6.svg";
           }
           if (weatherID >=600 && weatherID<700){
-            image.src="weatherIcons/snowy-6.svg";
+            image.src="assets/weatherIcons/snowy-6.svg";
           }
           if (weatherID >=700 && weatherID<800){
-            image.src="weatherIcons/cloudy.svg";
+            image.src="assets/weatherIcons/cloudy.svg";
           }
           document.querySelector("#loader").style.height="0px";
           document.querySelector("svg").classList.add("inactive");
