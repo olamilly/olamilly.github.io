@@ -184,6 +184,20 @@
         justify-content: center;
         align-items: center;
       }
+      #localDate{
+        width: 100%;
+        text-align: center;
+        font-size: 20px;
+        margin:0px;
+
+      }
+      #localTime{
+        width: 100%;
+        text-align: center;
+        font-size: 70px;
+        margin:0px;
+        color:rgb(117, 166, 182);
+      }
     </style>
     <script> 
     </script>
@@ -191,7 +205,7 @@
 <body>
     <div class="container">
         <header>
-          <span class="inactive" id="back">
+          <span class="inactive" id="back" style="cursor: pointer;">
             <box-icon name='arrow-back'></box-icon>
           </span>
           <span id="Logo">
@@ -218,10 +232,10 @@
         </form>
         <div id="lBtnholder"><button id="locationBtn">Use Current Location</button></div>
 
-        <div id="result" class="inactive"><!--class="inactive"-->
+        <div id="result" class="inactive" ><!--class="inactive"-->
           <div id="time"> 
-            <p></p>
-            <h3 id=localTime></h3>
+            <p id=localDate></p>
+            <p id=localTime></p>
           </div>
           <img src="assets/weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
           <div><h1><span id="mainTemp">17</span>°C</h1></div>
@@ -307,7 +321,30 @@
         async function fetchData(){
 
           try {
-          const response = await fetch(url).then(response => response.json()).then(result => weatherDetails(result));
+          const response = await fetch(url).then(response => response.json()).then(result =>{
+            if(result.cod==200){
+              timelat=result.coord.lat;
+              timelon=result.coord.lon;
+              // Convert location to timezone
+              const apiKey = '7HMIDO9W3MZG';
+              const url = `http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lat=${timelat}&lng=${timelon}`;
+
+              fetch(url)
+                  .then(response => response.json())
+                  .then(data => {
+                      const timezone = data.zoneName;
+
+                      // Display local time
+                      const options = { timeZone: timezone, hour12: false };
+                      const localTime = new Date().toLocaleTimeString('en-US', options);
+                      const localDate = new Date();
+                      myday=new Date().getDay();
+                      dotw=["Sunday,","Monday,","Tuesday,", "Wednesday,", "Thursday,","Friday,","Saturday,"];
+                      document.getElementById('localTime').textContent = String(localTime).slice(0,5);
+                      document.getElementById('localDate').textContent = dotw[myday]+String(localDate).slice(3,16);
+                  })
+                  .catch(error => console.error('Error fetching timezone:', error));}
+            weatherDetails(result)});
           } catch (error) {
           // TypeError: Failed to fetch
           document.querySelector("svg").classList.add("inactive");
@@ -317,24 +354,6 @@
           
         }
         function weatherDetails(apiResult){
-          timelat=apiResult.coord.lat;
-          timelon=apiResult.coord.lon;
-          //headers={"Access-Control-Allow-Origin": "http://127.0.0.1:5500/"}
-          fetch(`https://timezoneapi.io/api/ip/?latitude=${timelat}&longitude=${timelon}`, {
-          method : "GET",
-          mode: 'cors'})
-            .then(response => response.json())
-            .then(data => {
-                const timezone = data.data.ianaTimezone;
-
-                // Display local time
-                const options = { timeZone: timezone, hour12: false };
-                const localTime = new Date().toLocaleTimeString('en-US', options);
-
-                document.getElementById('localTime').textContent = localTime;
-            })
-            .catch(error => console.error('Error fetching timezone:', error));
-
             if (apiResult.cod == 404){
               document.querySelector("#loader").style.height="0px";
               document.querySelector("svg").classList.add("inactive");
