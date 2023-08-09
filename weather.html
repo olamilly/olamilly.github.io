@@ -218,7 +218,11 @@
         </form>
         <div id="lBtnholder"><button id="locationBtn">Use Current Location</button></div>
 
-        <div id="result" class="inactive">
+        <div id="result" class="inactive"><!--class="inactive"-->
+          <div id="time"> 
+            <p></p>
+            <h3 id=localTime></h3>
+          </div>
           <img src="assets/weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
           <div><h1><span id="mainTemp">17</span>°C</h1></div>
           <div id="description">Sunny</div>
@@ -313,6 +317,24 @@
           
         }
         function weatherDetails(apiResult){
+          timelat=apiResult.coord.lat;
+          timelon=apiResult.coord.lon;
+          //headers={"Access-Control-Allow-Origin": "http://127.0.0.1:5500/"}
+          fetch(`https://timezoneapi.io/api/ip/?latitude=${timelat}&longitude=${timelon}`, {
+          method : "GET",
+          mode: 'cors'})
+            .then(response => response.json())
+            .then(data => {
+                const timezone = data.data.ianaTimezone;
+
+                // Display local time
+                const options = { timeZone: timezone, hour12: false };
+                const localTime = new Date().toLocaleTimeString('en-US', options);
+
+                document.getElementById('localTime').textContent = localTime;
+            })
+            .catch(error => console.error('Error fetching timezone:', error));
+
             if (apiResult.cod == 404){
               document.querySelector("#loader").style.height="0px";
               document.querySelector("svg").classList.add("inactive");
