@@ -34,7 +34,7 @@
         width:100%;
         max-width:350px;
         background-color: rgb(243, 236, 236);
-        box-shadow: 6px 6px grey;
+        box-shadow: 6px 6px dimgray;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -198,6 +198,13 @@
         margin:0px;
         color:rgb(117, 166, 182);
       }
+      #timeZone{
+        width: 100%;
+        text-align: center;
+        margin:0px;
+        color:rgb(117, 166, 182);
+        font-size: 10px;
+      }
     </style>
     <script> 
     </script>
@@ -236,8 +243,9 @@
           <div id="time"> 
             <p id=localDate></p>
             <p id=localTime></p>
+            <p id="timeZone"></p>
           </div>
-          <img src="assets/weatherIcons/day.svg" alt="Weather Icon" width="100px" height="100px">
+          <img src="assets/weatherIcons/day.svg" alt="Weather Icon" width="150px" height="150px">
           <div><h1><span id="mainTemp">17</span>°C</h1></div>
           <div id="description">Sunny</div>
           <div id="location">LAGOS, NG</div>
@@ -332,19 +340,20 @@
               fetch(url)
                   .then(response => response.json())
                   .then(data => {
+                    console.log(data);
                       const timezone = data.zoneName;
-
+                      document.getElementById("timeZone").innerHTML=data.abbreviation;
                       // Display local time
                       const options = { timeZone: timezone, hour12: false };
+                      const options2 = { timeZone: timezone, weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
                       const localTime = new Date().toLocaleTimeString('en-US', options);
-                      const localDate = new Date();
-                      myday=new Date().getDay();
-                      dotw=["Sunday,","Monday,","Tuesday,", "Wednesday,", "Thursday,","Friday,","Saturday,"];
+                      const localDate = new Date().toLocaleDateString('en-US', options2);
                       document.getElementById('localTime').textContent = String(localTime).slice(0,5);
-                      document.getElementById('localDate').textContent = dotw[myday]+String(localDate).slice(3,16);
+                      document.getElementById('localDate').textContent = localDate;
+                      weatherDetails(result)
                   })
                   .catch(error => console.error('Error fetching timezone:', error));}
-            weatherDetails(result)});
+            });
           } catch (error) {
           // TypeError: Failed to fetch
           document.querySelector("svg").classList.add("inactive");

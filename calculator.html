@@ -19,15 +19,17 @@
     .container{
       width:25%;
       border:2px solid;
-      border-radius: 10px;
+      border-radius: 15px;
       padding:8px;
       min-width:250px;
       background-color: lightblue;
+      box-shadow: 6px 6px dimgray;
     }
     .screen{
+      box-shadow: inset 0 0 10px dimgray;
       border:2px solid;
       background-color: black;
-      border-radius: 5px;
+      border-radius: 10px;
       width:100%;
       height: 150px;
     }
@@ -54,9 +56,10 @@
       margin:2px;
       text-align: center;
       background-color: white;
-      border-radius: 5px;
+      border-radius: 10px;
       font-weight: bold;
       font-size: 25px;
+      box-shadow: 3px 3px dimgray;
     }
     #lastRow>p, .operations>p{
       width:25%;
@@ -179,8 +182,6 @@
     function calculate(x, y, z){
       a = Number(x);
       b= Number(y);
-      console.log(a);
-      console.log(b);
       if (z=="plus"){
         return(a+b);
       }
