@@ -4,7 +4,159 @@
     <meta charset="UTF-8" />
     <title>currency converter</title>
 </head>
+<style>
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+.show {
+    display:block;
+}
+#currencies, #monies{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+section{
+    border: 1px solid red;
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 7rem;
+    border: 1px solid yellow;
+}
+.navItem{
+    display: flex;
+    align-items: center;
+    border:2px solid red;
+    justify-content: space-between;
+    width:100%;
+}
+#location{
+    display: flex; 
+    justify-content: flex-end;
+    border: 2px solid green;
+    width:100%
+}
+#left{
+    width:20%;
+    height: 7rem;
+    margin-right: 1rem;
+}
+.links{
+    border:2px solid yellow;
+    width:100%
+}
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    border: 2px solid blue;
+    margin: 1rem;
+}
+section{
+    width:50%;
+}
+img{
+    width:50%;
+    height:50%;
+}
+.rates>p{
+    margin: 0;
+}
+
+</style>
 <body>
-    
+    <header>
+        <div class="navItem" id="left">
+            <img src="assets/paper2.png"/>
+            <p>Olamilly Fx</p>
+        </div>
+        <div class="navItem" id="right">
+            <div class="links"> 
+                <div class="dropdown">
+                    <a onclick="myFunction()" class="dropbtn">Dropdown</a>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="#">Link 1</a>
+                      <a href="#">Link 2</a>
+                      <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </div>
+            <div id="location">
+                <p>Globe</p>
+                <p>location</p>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h1 >Currency Converter</h1>
+        <div>
+            <h1>Date</h1>
+            <h3>Time</h3>
+        </div>
+        <h2><span id="s1">US Dollar</span> to <span id="s2"> Naira</span></h2>
+        
+        <section>
+            <div id="currencies">
+                <div class="dropdown">
+                    <input value="USD" id="1"/>
+                    <div id="myDropdown1" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+                <p>TO</p>
+                <div class="dropdown">
+                    <input value="NGN" id="2"/>
+                    <div id="myDropdown2" class="dropdown-content">
+                        <a href="#">Link 1</a>
+                        <a href="#">Link 2</a>
+                        <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </div>
+            <div id="monies">
+                <div class="rates" id="rate1">
+                    <input/>
+                    <p>USD</p>
+                </div>
+                <p>=</p>
+                <div class="rates" id="rate2">
+                    <input/>                  
+                    <p>NGN</p> 
+                </div>
+            </div>
+            <small>Olamilly Fx is powered by <a>api</a></small>
+        </section>
+    </main>
+
+    <script src="mycurrency.js"></script>
 </body>
 </html>
