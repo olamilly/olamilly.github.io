@@ -28,6 +28,7 @@ function opendrops(a){
     if (document.getElementById("myDropdown").classList.contains('show')){
         document.getElementById("myDropdown").classList.remove('show');
     }
+    document.getElementById(a).value="";
     s = "myDropdown"+a;
     document.getElementById(s).classList.toggle("show");
     currentBox=s
@@ -91,6 +92,9 @@ addEventListener("DOMContentLoaded", () => {
         });
 });
 function fillBox(e, a){
+    if(document.getElementById("destination").value!="0"){
+        document.getElementById("destination").value=""
+    }
     if(a==1){
         document.getElementById(a).value=e;
         var b = "#rate"+String(a)+">p";
@@ -178,3 +182,28 @@ document.querySelectorAll("#myDropdown>a").forEach(e=>{
         }
     })
 })
+
+document.getElementById("1").addEventListener("keyup", (event) => {
+    filterFunction(event);
+  });
+document.getElementById("2").addEventListener("keyup", (event) => {
+    filterFunction(event);
+  });
+
+function filterFunction(e) {
+    //console.log(e.target.id);
+    var input, filter, ul, li, a, i;
+    input = document.getElementById(e.target.id);
+    filter = input.value.toUpperCase();
+    x="myDropdown"+e.target.id
+    div = document.getElementById(x);
+    a = div.querySelectorAll("a");
+    for (i = 0; i < a.length; i++) {
+      txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        a[i].style.display = "";
+      } else {
+        a[i].style.display = "none";
+      }
+    }
+  }
