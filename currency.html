@@ -4,18 +4,19 @@
     <meta charset="UTF-8" />
     <title>currency converter</title>
     <link rel="stylesheet" href="currencystyles.css">
+    <link rel="stylesheet" href="node_modules/currency-flags/dist/currency-flags.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
-    <!--<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <div class="navItem" id="left">
             <img src="assets/fx.png"/>
-            <p>Olamilly Fx</p>
+            <p>OlamillyFx</p>
         </div>
         <div class="navItem">
             <div class="links"> 
@@ -30,15 +31,15 @@
             </div>
         </div>
         <div class="navItem" id="right">
-            <div id="location">
-                <p><box-icon name='globe'></box-icon></p>
+            <div id="location" style="cursor: context-menu;">
+                <p><box-icon style="fill:white" name='globe'></box-icon></p>
                 <p style="font-size:14px">NG</p>
             </div>
         </div>
     </header>
-
+    <div id="hero"></div>
     <main>
-        <small class="error"></small>
+        <div id="errorBox" style="display: none;"><box-icon style="fill:red" name='wifi-off'></box-icon><small class="error"></small></div>
         <div id="loader"><svg class="inactive" xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 50 50" stroke="rgb(117, 166, 182)">
             <g fill="none" fill-rule="evenodd">
                 <g transform="translate(1 1)" stroke-width="2">
@@ -75,18 +76,18 @@
                     <input type="number" value="0" id="source"/>
                     <p>USD</p>
                 </div>
-                <p>=</p>
+                <p><box-icon style="fill:#1A7BDB" name='transfer-alt'></box-icon></p>
                 <div class="rates" id="rate2">
                     <input type="number" value="0" id="destination" readonly/>                  
                     <p>NGN</p> 
                 </div>
             </div>
             <button disabled class="disabled">Convert</button>
-            <small>Olamilly Fx currency converter is powered by <a href="https://www.exchangerate-api.com/" target=”_blank”>ExchangeRateApi</a> </small>
+            <small>OlamillyFx currency converter is powered by <a href="https://www.exchangerate-api.com/" target=”_blank”>ExchangeRateApi</a> </small>
         </section>
         </div>
+        <div style="margin-top: 1rem;" class="currency-flag currency-flag-ngn"></div>
     </main>
-
     <script src="mycurrency.js"></script>
 </body>
 </html>

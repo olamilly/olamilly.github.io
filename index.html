@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta http-equip="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Lato:wght@700&display=swap" rel="stylesheet">
@@ -11,7 +12,7 @@
   <style type="text/css">
     *{
       font-family: 'Bebas Neue', sans-serif;
-font-family: 'Lato', sans-serif;
+      font-family: 'Lato', sans-serif;
       box-sizing: border-box;
       font-weight: bold;
     }
@@ -48,10 +49,15 @@ font-family: 'Lato', sans-serif;
       transform: translateY(-10px);
     }
     span{
-      background-color: rgb(172, 161, 161);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       margin:15px;
       padding:4px;
       border-radius: 3px;
+    }
+    .languages{
+      display: flex;
     }
     p{
       color:rgb(68, 56, 56);
@@ -79,38 +85,50 @@ font-family: 'Lato', sans-serif;
     .row>a{
       min-width: 200px;
     }
+    box-icon{
+      height:2rem;
+      width:2rem;
+    }
+    @media only screen and (max-width: 600px) {
+      .row{
+        flex-direction: column;
+        align-items: center;
+      }
+    }
   </style>
 </head>
 <body>
   <h1>PROJECTS</h1>
+  
 <div class="row">
   <a href="weather.html"><section id="weather" >
     <article class="details">
       <h2>Weather App</h2>
       <p class="description">Web application that allows users to get present weather conidtion of their desired city. Also able to display the current weather condition of the user's current location </p> 
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
+      <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='javascript' type='logo' ></box-icon> JavaScript</span></p>
     </article>
   </section></a>
-  <a href="wordle.html"><section id="wordle" >
+  <a href="currency.html"><section id="currency" >
     <article class="details">
-      <h2>Wordle</h2>
-      <p class="description">Cloned the popular word game Wordle. The goal of the game is to guess the a randomly generated 5 letter word in less than six tries. I made this project because I personally love to play the game but it's only available to play once a day; now I (and you too) can play as many times as we want.</p> 
-      <p class="languages"><span>HTML</span> <span>Bootstrap</span> <span>jQuery</span></p>
+      <h2>Currency Converter</h2>
+      <p class="description">Web application that aids users to check the latest foreign exchange rates in real time and perform accurate currency conversions. Supports 120+ currencies. </p> 
+      <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span> <span><box-icon name='javascript' type='logo' ></box-icon> JavaScript</span></p>
     </article>
-  </section></a></div>
+  </section></a>
+  </div>
   <div class="row">
-  <a href="calculator.html"><section id="calc" >
-    <article class="details">
-      <h2>Basic Calculator App</h2>
-      <p class="description">A simple calculator application to perform basic arithmetic operations on numbers.</p>
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
-    </article>
-  </section></a>
+    <a href="wordle.html"><section id="wordle" >
+      <article class="details">
+        <h2>Wordle</h2>
+        <p class="description">Cloned the popular word game Wordle. The goal of the game is to guess a randomly generated 5 letter word in less than six tries. I made this project because I personally love to play the game but it's only available to play once a day; now I (and you too) can play as many times as we want.</p> 
+        <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='bootstrap' type='logo' ></box-icon> Bootstrap</span> <span><box-icon name='jquery' type='logo' ></box-icon> jQuery</span></p>
+      </article>
+    </section></a>
   <a href="tictactoe.html"><section id="tictactoe" >
     <article class="details">
       <h2>Tic Tac Toe</h2>
       <p class="description">Multiplayer game of X and O with a very simple and minimalistic UI</p> 
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
+      <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='javascript' type='logo' ></box-icon> JavaScript</span></p>
     </article>
   </section></a>
     </div>
@@ -119,23 +137,23 @@ font-family: 'Lato', sans-serif;
       <article class="details">
         <h2>Rock Paper Scissors</h2>
         <p class="description">Simple web application that allows the user to play the classic rock paper scissors game against their computer. </p> 
-        <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
+        <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='javascript' type='logo' ></box-icon> JavaScript</span></p>
       </article>
     </section></a>
-    <a href="profilecard.html"><section id="github" >
-    <article class="details">
-      <h2>Github Profile Generator</h2>
-      <p class="description">Web application that generates a profile card for you based on information available on your gitHub account. All it needs is your gitHub account username. Working on using APIs and fetching and posting data across the web. </p> 
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
-    </article>
-  </section></a>
+    <a href="calculator.html"><section id="calc" >
+      <article class="details">
+        <h2>Basic Calculator App</h2>
+        <p class="description">A simple calculator application to perform basic arithmetic operations on numbers.</p>
+        <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='javascript' type='logo' ></box-icon> JavaScript</span></p>
+      </article>
+    </section></a>
   </div>
   <div class="row">
   <a href="vue-application.html"><section id="vueApp" >
     <article class="details">
       <h2>Vue.js basic "twitter" clone</h2>
       <p class="description">Started working with Vue.js (A frontend javascript framework that allows developers to make SPAs quickly and easily). Made this to practice some basic vue properties. Basic UI that allows the user to post messages/"tweets", delete and search actively. </p> 
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue</span></p>
+      <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='vuejs' type='logo' ></box-icon> Vue js</span></p>
     </article>
   </section></a>
   
@@ -143,7 +161,7 @@ font-family: 'Lato', sans-serif;
     <article class="details">
       <h2>Vue.js Youtube playlist Manager</h2>
       <p class="description">My second Vue.js project. A web application that helps users get youtube playlists based on a topic of their choice and watch the videos in that playlist. Working with axios and REST APIs. </p> 
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue</span></p>
+      <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='vuejs' type='logo' ></box-icon> Vue js</span></p>
     </article>
   </section></a></div>
   <div class="row">
@@ -151,17 +169,25 @@ font-family: 'Lato', sans-serif;
     <article class="details">
       <h2>Multi Step form</h2>
       <p class="description">My third Vue.js project. A web application that takes user information on various categories and creates a profile on that User. Complete with even a username and password level. Feel free to fork the code off my github repo and edit as you would like and embed into your own projects. </p> 
-      <p class="languages"><span>HTML</span> <span>CSS</span>  <span>Vue</span></p>
+      <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='vuejs' type='logo' ></box-icon> Vue js</span> </p>
     </article></section></a>
-    
-    <a href="todolist.html"><section id="todo" >
+    <a href="profilecard.html"><section id="github" >
       <article class="details">
-        <h2>Basic To-Do List</h2>
-        <p class="description">A simple to do list application to help organize day to day activities.</p>
-        <p>edit: made it draggable around the window</p> 
-        <p class="languages"><span>HTML</span> <span>CSS</span>  <span>JavaScript</span></p>
+        <h2>Github Profile Generator</h2>
+        <p class="description">Web application that generates a profile card for you based on information available on your gitHub account. All it needs is your gitHub account username. Working on using APIs and fetching and posting data across the web. </p> 
+        <p class="languages"><span><box-icon type='logo' name='html5'></box-icon>HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='javascript' type='logo' ></box-icon>JavaScript</span></p>
       </article>
-    </section></a>>
+    </section></a>
+    </div>
+    <div class="row">
+      <a href="todolist.html"><section id="todo" >
+        <article class="details">
+          <h2>Basic To-Do List</h2>
+          <p class="description">A simple to do list application to help organize day to day activities.</p>
+          <p>edit: made it draggable around the window</p> 
+          <p class="languages"><span><box-icon type='logo' name='html5'></box-icon> HTML</span> <span><box-icon name='css3' type='logo' ></box-icon> CSS</span>  <span><box-icon name='javascript' type='logo' ></box-icon>JavaScript</span></p>
+        </article>
+      </section></a>
     </div>
   <p id="footer">&copy; Tajudeen-mustapha Ismail Olamide.  </p>
 </body>

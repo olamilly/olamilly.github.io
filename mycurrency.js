@@ -71,13 +71,20 @@ addEventListener("DOMContentLoaded", () => {
                 currencies.push(d[0])
             })
             currencies.forEach(currency => {
+                const div1=document.createElement('div');
+                const div2=document.createElement('div');
                 const sourceOption = document.createElement('a');
                 const targetOption = document.createElement('a');
                 sourceOption.classList.add("1");
                 targetOption.classList.add("2");
-                sourceOption.textContent = targetOption.textContent = currency;
-                sourceCurrencySelect.appendChild(sourceOption);
-                targetCurrencySelect.appendChild(targetOption);
+                var x=`<div class="currency-flag currency-flag-${currency.toLowerCase()}"></div>`;
+                sourceOption.textContent = targetOption.textContent =currency;
+                div1.innerHTML=x
+                div2.innerHTML=x
+                div1.appendChild(sourceOption);
+                div2.appendChild(targetOption);
+                sourceCurrencySelect.appendChild(div1);
+                targetCurrencySelect.appendChild(div2);
                 sourceOption.addEventListener("click", ()=>{ fillBox(sourceOption.innerHTML, 1)})
                 targetOption.addEventListener("click", ()=>{fillBox(targetOption.innerHTML, 2)})
                 document.getElementById("loader").style.display="none"
@@ -88,7 +95,8 @@ addEventListener("DOMContentLoaded", () => {
             console.error('Error fetching currencies:', error)
             document.getElementById("loader").style.display="none"
             document.querySelector(".error").style.display="flex";
-            document.querySelector(".error").innerHTML="Network Error, Failed to fetch Currrency Data. Check your connection and try again.";
+            document.querySelector(".error").innerText="Network Error, Failed to fetch Currrency Data. Check your connection and try again.";
+            document.getElementById("errorBox").style.display="block";
         });
 });
 function fillBox(e, a){
@@ -191,8 +199,7 @@ document.getElementById("2").addEventListener("keyup", (event) => {
   });
 
 function filterFunction(e) {
-    //console.log(e.target.id);
-    var input, filter, ul, li, a, i;
+    var input, filter, a, i;
     input = document.getElementById(e.target.id);
     filter = input.value.toUpperCase();
     x="myDropdown"+e.target.id
@@ -201,9 +208,9 @@ function filterFunction(e) {
     for (i = 0; i < a.length; i++) {
       txtValue = a[i].textContent || a[i].innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        a[i].style.display = "";
+        a[i].parentElement.style.display = "";
       } else {
-        a[i].style.display = "none";
+        a[i].parentElement.style.display = "none";
       }
     }
   }
