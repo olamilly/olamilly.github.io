@@ -84,7 +84,7 @@ header{
     right:0;
 }
 #hero{
-  padding: 3rem;
+  padding: 3.3rem;
 }
 .navItem{
     display: flex;
@@ -240,6 +240,7 @@ main{
   }
   header{
     height: 7rem;
+    padding-right: 1rem;
   }
   #right{
     padding-left: 0;
@@ -257,13 +258,5 @@ main{
 @media only screen and (max-height: 800px) {
   .main{
     justify-content: center;
-  }
-}
-@media only screen and (max-height: 660px){
-  .main{
-    justify-content: center;
-  }
-  #hero{
-    padding: 2.5rem;
   }
 }
