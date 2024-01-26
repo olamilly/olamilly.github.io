@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Translator App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        html,body {
+        width: 100%;
+        height: 100%;
+        background-color: rgb(211, 229, 234);
+        margin: 0;
+        }
+        
+        .dropbtn {
+            background-color: #3498DB;
+            color: white;
+            padding-right: .2rem;
+            padding-left: .2rem;
+            padding-top: .8rem;
+            padding-bottom: .8rem;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            outline: none;
+            border-radius: .5rem;
+        }
+
+
+        .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        width:40%;
+        overflow: auto;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: .3rem;
+        }
+
+        .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        }
+
+        a:hover {background-color: #ddd; cursor: pointer;}
+
+        .show {display: block;}
+        #d1, #d2{
+            overflow-y:scroll; 
+            height:200px;
+        }
+        .main{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        #from, #to{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            min-width: 40%;
+            height: 50%;
+        }
+        .box{
+            height: 70%;
+            border: 2px solid #3498DB;
+            border-radius: .5rem; 
+            padding: .5rem;
+            background-color: lightblue;
+            outline: none;
+        }
+        header{
+            background-color: #3498DB;
+            display: flex;
+            justify-content: center;
+            color: white;
+            border-radius: .5rem;
+        }
+        footer{
+            width: 100%;
+            text-align: center;
+        }
+        .hide{
+            display: none !important;
+        }
+        @media only screen and (max-width: 580px){
+            .main{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+            }
+            #from, #to{
+                min-width: 65%;
+            }
+            .dropdown-content{
+                width: 65%; 
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lanaguage Translator</h1>
+    </header>
+    
+    <div class="main">
+        <div id="from">
+            <div class="drop" >
+                <input onclick="myFunction(event)" oninput="filter(event)" class="dropbtn" id="fromdrop" value="Select a Language"/>
+                <div id="d1" class="dropdown-content" style="text-align: center;">
+                    Loading...
+                </div>
+            </div>
+            
+            <textarea class="box" id="frombox" placeholder="Enter Text " oninput="userinput()"></textarea>
+        </div>
+        <p><box-icon style="fill:#1A7BDB" name='transfer-alt'></box-icon></p>
+        <div id="to">
+            <div class="drop" >
+                <input onclick="myFunction(event)" oninput="filter(event)" class="dropbtn" id="todrop" value="Select a Language"/>
+                <div id="d2" class="dropdown-content" style="text-align: center;">
+                    Loading...
+                </div>
+            </div>
+            <textarea class="box" id="tobox" placeholder="Translation " readonly style="cursor: not-allowed;"></textarea>
+        </div>
+    </div>
+
+    <footer>© Olamilly 2024</footer>
+    <script>
+        var source
+        var target
+        function myFunction(e) {
+            e.target.value=""            
+          if (e.target.id == "fromdrop"){
+            document.getElementById("d1").classList.toggle("show");
+            for (const child of document.getElementById("d1").children){
+                 child.classList.remove("hide")
+            }
+            if (document.getElementById("d2").classList.contains("show")){
+                document.getElementById("d2").classList.toggle("show");
+            }
+          }
+          else{
+            document.getElementById("d2").classList.toggle("show");
+            for (const child of document.getElementById("d2").children){
+                 child.classList.remove("hide")
+            }
+            if (document.getElementById("d1").classList.contains("show")){
+                document.getElementById("d1").classList.toggle("show");
+            }
+          }
+        }
+        
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function(event) {
+          if (!event.target.matches('.dropbtn')) {
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+              var openDropdown = dropdowns[i];
+              if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+              }
+            }
+          }
+        }
+
+        addEventListener("DOMContentLoaded", () => {
+            fetch("https://translation.googleapis.com/language/translate/v2/languages?target=en&key=AIzaSyCBUrULjhsSOWeq7V8o1QEoeYLLjjAFBkk")
+            .then(response => response.json() )
+            .then(data => {
+                document.getElementById("d1").innerHTML=""
+                document.getElementById("d2").innerHTML=""
+                data.data.languages.forEach(i=>{
+                    const sourceOption = document.createElement('a');
+                    const targetOption = document.createElement('a');
+                    sourceOption.innerText=i.name
+                    sourceOption.id=i.language
+                    targetOption.innerText=i.name
+                    targetOption.id=i.language
+                    document.getElementById("d1").appendChild(sourceOption)
+                    document.getElementById("d2").appendChild(targetOption)
+                })
+                document.querySelectorAll("a").forEach(i=>{
+                    i.addEventListener("click",()=>{
+                        selectLanguage(event)
+                    })
+                })
+            }).catch(error => {alert("Network Error. \nCheck your connection and try again.")})
+        })
+        function selectLanguage(e){
+            if(e.target.parentElement.id == "d1"){
+                document.getElementById("fromdrop").value=e.target.innerText
+                document.getElementById("frombox").value=""
+                for (const child of document.getElementById("d2").children){
+                    if(child.classList.contains("hide")){
+                        child.classList.remove("hide")
+                    }
+                }
+                for (const child of document.getElementById("d2").children){
+                    if (child.id == e.target.id){
+                        child.classList.add("hide")
+                    } 
+                }
+                source=e.target.id
+                if (source==target){
+                    target=""
+                    document.getElementById("todrop").value="Select a Language"
+                    document.getElementById("tobox").value=""
+                }
+            }
+            else{
+                document.getElementById("todrop").value=e.target.innerText
+                document.getElementById("tobox").value=""
+                target=e.target.id
+                if (source==target){
+                    target=""
+                    document.getElementById("todrop").value="Select a Language"
+                    document.getElementById("tobox").value=""
+                }
+                else{
+                    if (document.getElementById("frombox").value){
+                        userinput()
+                    } 
+                }
+            }
+        }
+        var t
+        function userinput(){
+            if (source && target){
+                clearTimeout(t)
+                t=setTimeout(()=>{
+                    url="https://translation.googleapis.com/language/translate/v2"+"?target="+target+"&key=AIzaSyCBUrULjhsSOWeq7V8o1QEoeYLLjjAFBkk"+"&source="+source+"&q="+document.getElementById("frombox").value+"&format=text"
+                    fetch(url)
+                        .then(response => response.json() )
+                        .then(data => {
+                            document.getElementById("tobox").value=data.data.translations[0].translatedText
+                        })
+                    
+                },500) 
+            }    
+        }
+
+        function filter(e){
+            if (e.target.id == "fromdrop"){
+                for (const child of document.getElementById("d1").children){
+                    child.classList.remove("hide")
+                   if(!child.textContent.toUpperCase().includes(e.target.value.toUpperCase())){
+                    child.classList.add("hide")
+                   }
+                }
+            }
+            else{
+                for (const child of document.getElementById("d2").children){
+                    child.classList.remove("hide")
+                   if(!child.textContent.toUpperCase().includes(e.target.value.toUpperCase())){
+                    child.classList.add("hide")
+                   }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
