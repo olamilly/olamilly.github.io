@@ -32,7 +32,8 @@
             width: 100%;
             text-align: center;
             outline: none;
-            border-radius: .5rem;
+            border-top-left-radius: .5rem;
+            border-bottom-left-radius: .5rem;
         }
 
 
@@ -98,6 +99,33 @@
         .hide{
             display: none !important;
         }
+        .input-container {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 15px;
+        background-color: #3498DB;
+        border-radius: .5rem;
+        
+        }
+
+        .icon {
+        text-align: center;
+        cursor: pointer;
+        }
+
+        .input-field {
+        width: 100%;
+        padding: 10px;
+        outline: none;
+        }
+        #mic{
+            position: relative;
+            left: 89%;
+            bottom:13%;
+            cursor: pointer;
+        }
+        
         @media only screen and (max-width: 580px){
             .main{
                 display: flex;
@@ -115,29 +143,37 @@
 </head>
 <body>
     <header>
-        <h1>Lanaguage Translator</h1>
+        <h1 style="text-align: center;">Lanaguage Translator</h1>
     </header>
     
     <div class="main">
         <div id="from">
             <div class="drop" >
-                <input onclick="myFunction(event)" oninput="filter(event)" class="dropbtn" id="fromdrop" value="Select a Language"/>
+                <div class="input-container">
+                    <input onclick="myFunction(event)" oninput="filter(event)" class="dropbtn input-field" id="fromdrop" value="Select a Language"/>
+                    <box-icon name='caret-down' class="icon" style="fill:white" onclick="myFunction(event)" id="fromdrop"></box-icon>
+                </div>
                 <div id="d1" class="dropdown-content" style="text-align: center;">
                     Loading...
                 </div>
             </div>
             
             <textarea class="box" id="frombox" placeholder="Enter Text " oninput="userinput()"></textarea>
+            <box-icon type='solid' style="fill:#1A7BDB" name='microphone' id="mic" onclick="speech()"></box-icon>
         </div>
         <p><box-icon style="fill:#1A7BDB" name='transfer-alt'></box-icon></p>
         <div id="to">
             <div class="drop" >
-                <input onclick="myFunction(event)" oninput="filter(event)" class="dropbtn" id="todrop" value="Select a Language"/>
+                <div class="input-container">
+                    <input onclick="myFunction(event)" oninput="filter(event)" class="dropbtn input-field" id="todrop" value="Select a Language"/>
+                    <box-icon name='caret-down' class="icon" style="fill:white" onclick="myFunction(event)" id="todrop"></box-icon>
+                </div>
                 <div id="d2" class="dropdown-content" style="text-align: center;">
                     Loading...
                 </div>
             </div>
             <textarea class="box" id="tobox" placeholder="Translation " readonly style="cursor: not-allowed;"></textarea>
+            <box-icon ></box-icon>
         </div>
     </div>
 
@@ -169,7 +205,7 @@
         
         // Close the dropdown if the user clicks outside of it
         window.onclick = function(event) {
-          if (!event.target.matches('.dropbtn')) {
+          if (!event.target.matches('.dropbtn') && !event.target.matches(".icon")) {
             var dropdowns = document.getElementsByClassName("dropdown-content");
             var i;
             for (i = 0; i < dropdowns.length; i++) {
@@ -177,6 +213,12 @@
               if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
               }
+            }
+            if (source==""||!source){
+            document.querySelector(".dropbtn#fromdrop").value="Select a language"
+            }
+            if (target==""||!target){
+                document.querySelector(".dropbtn#todrop").value="Select a language"
             }
           }
         }
@@ -274,6 +316,9 @@
                    }
                 }
             }
+        }
+        function speech(){
+            alert("Speech to text currently unavailable")
         }
     </script>
 </body>
