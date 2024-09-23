@@ -541,6 +541,12 @@
 											console.error("Error fetching timezone:", error)
 										);
 								}
+								 else {
+									document.querySelector("svg").classList.add("inactive");
+									document.querySelector(
+										"#loader"
+									).innerHTML = `<p style='text-align: center;color:red; padding:5px;'>${result.message}, refresh the page and try again.</p>`;
+								}
 							});
 					} catch (error) {
 						// TypeError: Failed to fetch
