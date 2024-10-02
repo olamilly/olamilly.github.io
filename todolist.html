@@ -1,188 +1,223 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta http-equip="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JS practice!</title>
-  <style>
-    *{
-      box-sizing: border-box;
-    }
-    #container{
-    display:flex;
-    flex-direction: column;
-    width:50%;
-    position: absolute;
-    max-width:300px;
-    align-items:center;
-    justify-content:center;
-    border-radius: 15px;
-    color:rgb(177, 182, 250);
-    border:3px solid  rgb(33, 33, 65);
-    background-color: rgb(62, 62, 78);
-    transform: translateX(50%);
-    }
-    .content{
-    width:70%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:25px;
-    }
-    button:hover{
-      cursor: pointer;
-    }
-    ul{
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content:center;
-    margin: 0px;
-    padding:0px;
-    width:100%;
-    list-style:none;
-    }
-    #add{
-    display:flex;
-    flex-direction: column;
-    align-items:center;
-    justify-content:center;
-    width:70%; 
-    margin-bottom:25px;
-    }
-    input{
-    height:20px;
-    width:70%;
-    margin:5px;
-    border-radius:3px;
-    color:rgb(177, 182, 250);
- padding:2px;
- background-color: rgb(115, 115, 138);}
-    #form{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    li{
-    width:100%;
-    margin:3px;
-    display:flex;
-    justify-content:space-between;
-    }
-    h2{
-    margin:0px;
-    border-bottom: 4px solid  rgb(33, 33, 65);
-    width:100%;
-    }
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--BoxIcons CSS CDN Link-->
+		<link
+			href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+			rel="stylesheet"
+		/>
+		<title>To Do List app</title>
+		<!-- Bootstrap CSS CDN Link-->
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+			crossorigin="anonymous"
+		/>
+		<style>
+			html,
+			body {
+				width: 100%;
+				height: 100%;
+				background-color: aliceblue;
+			}
+			.column {
+				width: 85%;
+				min-width: 300px;
+				max-width: 650px;
+			}
+			li {
+				background-color: var(--bs-card-cap-bg);
+				/* border: 1px solid lightblue; */
+				border-radius: 4px;
+				box-shadow: 2px 2px lightgray;
+			}
+			.strong {
+				font-weight: 700;
+			}
+			input,
+			.btn {
+				cursor: pointer;
+			}
+			.low {
+				border-left: 4px solid var(--bs-info);
+			}
+			.medium {
+				border-left: 4px solid var(--bs-primary);
+			}
+			.high {
+				border-left: 4px solid var(--bs-warning);
+			}
+			.urgent {
+				border-left: 4px solid var(--bs-danger);
+			}
+			.done {
+				color: lightgray;
+			}
+			.bx {
+				font-size: 1.4rem;
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div
+			class="d-flex justify-content-center align-items-center h-100 w-100 text-center"
+		>
+			<div class="column">
+				<div class="card mb-4 rounded-3 shadow-sm">
+					<div class="card-header py-3 d-flex justify-content-between">
+						<h4 class="my-0 fw-bold text-start" id="date">
+							Friday 13 July, 2024
+						</h4>
+						<p class="mb-0" id="time">2:00pm</p>
+					</div>
+					<div class="card-body">
+						<div
+							class="card-body-title d-flex align-items-center justify-content-between"
+						>
+							<h1 class="card-title text-start pricing-card-title">
+								Today's Tasks
+							</h1>
+							<button
+								class="btn btn-primary"
+								data-bs-toggle="modal"
+								data-bs-target="#exampleModal"
+							>
+								Add Task
+							</button>
+						</div>
 
-#header2{
-  display:flex; 
-  justify-content:space-between;
-  width:100%;
-}  
-#tab{
-  text-align: center;
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  color:white;
-  width:100%;
-  background-color: rgb(33, 33, 65);
-  user-select: none;
-  padding-top: 5px;
-  padding-bottom: 5px;
-}
-#tab:hover{
-  cursor: move;
-}
-button{
- border: 2px solid rgb(33, 33, 65);
- color:rgb(192, 195, 228);
- border-radius: 3px;
- padding:2px;
- background-color: rgb(115, 115, 138);
-}
-</style>
-  <script>  
-    var a=1;
-    function ready(){
-    var input = document.getElementById("inputBox");
-    input.addEventListener("keydown", function(e){
-    if (e.key=="Enter")
-      addFunction();
-    });
+						<ul class="list-unstyled mb-0"></ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div
+			class="modal fade"
+			id="exampleModal"
+			tabindex="-1"
+			role="dialog"
+			aria-labelledby="exampleModalLabel"
+			aria-hidden="true"
+		>
+			<div class="modal-dialog modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h5 class="modal-title" id="exampleModalLabel">Add Task to List</h5>
+						<button
+							type="button"
+							class="btn-close"
+							data-bs-dismiss="modal"
+							aria-label="Close"
+						></button>
+					</div>
+					<div class="modal-body">
+						<div>
+							<div class="mb-3">
+								<label for="taskName" class="form-label">Task Name</label>
+								<input
+									class="form-control"
+									id="taskName"
+									aria-describedby="taskName"
+									onkeyup="checkTaskInput(event)"
+								/>
+							</div>
+							<div class="form-group mb-3">
+								<label class="form-label" for="description">Description</label>
+								<textarea
+									class="form-control"
+									id="description"
+									rows="3"
+								></textarea>
+							</div>
 
-    document.getElementById("tab").addEventListener("mousedown",function(){
-  document.getElementById("tab").addEventListener("mousemove",dragFunction)
-});
-document.addEventListener("mouseup",function(){
-  document.getElementById("tab").removeEventListener("mousemove",dragFunction)
-});
-    };
-    document.addEventListener("DOMContentLoaded",ready);
-
-    function removeFunction(d){
-    let get = d.getAttribute('id');
-    var b=document.getElementById(get);
-    b.removeChild(b.lastElementChild);
-    var l="h3" + get;
-    var val = document.getElementById(l).innerHTML;
-    document.getElementById(l).innerHTML="<s>"+val+"</s>";
-    };
-    function addFunction(){
-    var val = document.getElementById("inputBox").value;
-    if(val !="" && val!=" " ){
-    var newList = document.createElement("li");
-    newList.setAttribute("id",a);
-    var item = document.createElement("h3");
-    item.innerHTML = val;
-    var l="h3"+a;
-    item.setAttribute("id",l);
-    newList.appendChild(item);
-    document.getElementById("list").appendChild(newList);
-    var newButton = document.createElement("button");
-    newButton.innerHTML = "Done";
-    newButton.setAttribute("id",a);
-    newButton.setAttribute("onClick","removeFunction(this)");
-    document.getElementById(a).appendChild(newButton);
-    document.getElementById(a).style.display="flex";
-    document.getElementById(a).style.height="30px";
-    document.getElementById(a).style.alignItems="center";
-    document.getElementById("inputBox").value="";
-    a=a+1;}
-    };
-    function clearFunction(){
-    document.getElementById("list").innerHTML="";
-    };
-    function dragFunction({movementX, movementY}){
-      let getStyle = window.getComputedStyle(document.getElementById("container"));
-      let left = parseInt(getStyle.left);
-      let top = parseInt(getStyle.top);
-      l=left + movementX;
-      t=top + movementY;
-      l.toString();
-      t.toString();
-      l=l+"px";
-      t=t+"px";
-      document.getElementById("container").style.left=l;
-      document.getElementById("container").style.top=t;
-    }
-  </script>
-</head> 
-<body>
-  <section id='container'>
-    <div id="tab"><b>...</b></div>
-    <h1>To-Do List</h1>
-    <div id='add'>
-      <h2>ADD ITEM</h2>
-      <div id="form"><input id="inputBox" type='text'>
-      <button onClick="addFunction()">Add</button></div> 
-    </div>
-    <div class='content'>
-        <div id="header2"><h2>TO-DO </h2><button onClick="clearFunction()">clear list</button></div>
-      <ul id="list" >
-     </ul>
-    </div>
-  </section>
-</body>
+							<div>
+								<p class="form-label">Priority</p>
+								<div class="d-flex justify-content-center flex-wrap">
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="priority"
+											id="low"
+											value="low"
+											checked
+										/>
+										<label class="form-check-label" for="low"
+											><span class="badge text-bg-info rounded-pill"
+												>Low</span
+											></label
+										>
+									</div>
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="priority"
+											id="medium"
+											value="medium"
+										/>
+										<label class="form-check-label" for="medium"
+											><span class="badge text-bg-primary rounded-pill"
+												>Medium</span
+											></label
+										>
+									</div>
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="priority"
+											id="high"
+											value="high"
+										/>
+										<label class="form-check-label" for="high"
+											><span class="badge text-bg-warning rounded-pill"
+												>High</span
+											></label
+										>
+									</div>
+									<div class="form-check form-check-inline">
+										<input
+											class="form-check-input"
+											type="radio"
+											name="priority"
+											id="urgent"
+											value="urgent"
+										/>
+										<label class="form-check-label" for="urgent"
+											><span class="badge text-bg-danger rounded-pill"
+												>Urgent</span
+											></label
+										>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button
+							id="addTask"
+							type="button"
+							class="btn btn-primary"
+							onclick="saveTask()"
+							disabled
+							data-bs-dismiss="modal"
+						>
+							Save Task
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="todoapp.js"></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+			integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+			crossorigin="anonymous"
+		></script>
+	</body>
+</html>
